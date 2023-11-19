@@ -1,0 +1,243 @@
+fileFormatVersion: 2
+guid: 45a284e4d254ec64b9e38cf7bf1fc8b7
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 1
+    textureFormat: 12
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 1024
+    resizeAlgorithm: 1
+    textureFormat: 50
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: playing_field 1_12
+      rect:
+        serializedVersion: 2
+        x: 1614
+        y: 1519
+        width: 1158
+        height: 389
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fbc668964eda18b4abda92eea9dd519a
+      internalID: -1499514233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: playing_field 1_22
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 27
+        width: 1370
+        height: 1685
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f3725fef0f1ec841bbde282131d17f2
+      internalID: 1623814883
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: playing_field 1_29
+      rect:
+        serializedVersion: 2
+        x: 1939
+        y: 195
+        width: 909
+        height: 912
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17cfafc5c3a593645b3cf6d1d5a17185
+      internalID: 1980548485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      playing_field 1_4: 727028159
+      playing_field 1_19: -762010249
+      playing_field 1_29: 1980548485
+      playing_field 1_8: 78901688
+      playing_field 1_3: -133866106
+      playing_field 1_18: 453984413
+      playing_field 1_10: -1789076261
+      playing_field 1_9: 2108693005
+      playing_field 1_27: 1294886031
+      playing_field 1_12: -1499514233
+      playing_field 1_14: 1538888428
+      playing_field 1_41: 1692379162
+      playing_field 1_1: 920881539
+      playing_field 1_15: -803633741
+      playing_field 1_32: -1280177810
+      playing_field 1_7: -1346810015
+      playing_field 1_37: 506423900
+      playing_field 1_2: -428546396
+      playing_field 1_23: -1570087149
+      playing_field 1_22: 1623814883
+      playing_field 1_35: 91386804
+      playing_field 1_24: 1271980698
+      playing_field 1_26: 1155007677
+      playing_field 1_30: -1922618758
+      playing_field 1_33: 1659158734
+      playing_field 1_6: -510393813
+      playing_field 1_20: 461425121
+      playing_field 1_25: 1893024585
+      playing_field 1_21: -1101645161
+      playing_field 1_40: -2097415994
+      playing_field 1_34: 4763137
+      playing_field 1_28: -1251877019
+      playing_field 1_17: 1701773110
+      playing_field 1_39: 1472622867
+      playing_field 1_5: -1572142332
+      playing_field 1_44: 421195254
+      playing_field 1_0: 1629001667
+      playing_field 1_42: 1966645541
+      playing_field 1_38: 891755306
+      playing_field 1_11: -1602568029
+      playing_field 1_13: 1212584755
+      playing_field 1_36: -1995911838
+      playing_field 1_43: 92728827
+      playing_field 1_16: -643490156
+      playing_field 1_31: 2078017216
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

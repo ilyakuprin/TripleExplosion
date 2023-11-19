@@ -1,0 +1,172 @@
+using UnityEngine;
+using Zenject;
+
+namespace TripleExplosion
+{
+    public class SwapParent : MonoBehaviour
+    {
+        private FigurinesHandler _figurinesHandler;
+        private SearchMatches _searchMatches;
+        private MovingFigurines _movingFigures;
+        private GameBoardHandler _board;
+        private SwapParent _secondFigure;
+        private int _column;
+        private int _row;
+        private readonly float _halfRightAngle = 45f;
+        private readonly float _straightAngleWithoutHalfRight = 135f;
+
+        public MovingFigurines GetMovingFigurines { get => _movingFigures; }
+        public int GetColumn { get => _column; }
+        public int GetRow { get => _row; }
+
+        [Inject]
+        public void Construct(GameBoardHandler board,
+                              SearchMatches searchMatches,
+                              FigurinesHandler figurinesHandler)
+        {
+            _board = board;
+            _movingFigures = new MovingFigurines(this);
+            _searchMatches = searchMatches;
+            _figurinesHandler = figurinesHandler;
+        }
+
+        public void SetCoordinates()
+        {
+            _column = (int)transform.parent.localPosition.x;
+            _row = (int)transform.parent.localPosition.y;
+        }
+
+        private void Awake() => SetCoordinates();
+
+        public void ChangeParant(float swipeAngle, bool isFindMatches)
+        {
+            if (swipeAngle > -_halfRightAngle &&
+                swipeAngle <= _halfRightAngle &&
+                _column < _board.GetLengthColumn - 1)
+                RightSwipe();
+            else if (swipeAngle > _halfRightAngle &&
+                     swipeAngle <= _straightAngleWithoutHalfRight &&
+                     _row < _board.GetLengthRow - 1)
+                UpSwipe();
+            else if ((swipeAngle > _straightAngleWithoutHalfRight ||
+                    swipeAngle <= -_straightAngleWithoutHalfRight) &&
+                    _column > 0)
+                LeftSwipe();
+            else if ((swipeAngle < -_halfRightAngle &&
+                      swipeAngle >= -_straightAngleWithoutHalfRight) &&
+                      _row > 0)
+                DownSwipe();
+            else
+            {
+                _board.EnableActiveBoarde();
+                return;
+            }
+
+            _figurinesHandler.SwipeFigurines(GetColumn, GetRow,
+                                             _secondFigure.GetColumn, _secondFigure.GetRow);
+
+            SubscribeEvent(isFindMatches);
+            StartMove();
+            _secondFigure.StartMove();
+        }
+
+        private void RightSwipe()
+        {
+            IncreaseColumn();
+            SetSecondFigure();
+            _secondFigure.DecreaseColumn();
+        }
+
+        private void UpSwipe()
+        {
+            IncreaseRow();
+            SetSecondFigure();
+            _secondFigure.DecreaseRow();
+        }
+
+        private void LeftSwipe()
+        {
+            DecreaseColumn();
+            SetSecondFigure();
+            _secondFigure.IncreaseColumn();
+        }
+
+        private void DownSwipe()
+        {
+            DecreaseRow();
+            SetSecondFigure();
+            _secondFigure.IncreaseRow();
+        }
+
+        private void SetSecondFigure()
+            //=> _secondFigure = _board.GetCell(_column, _row).GetChild(0).GetComponent<SwapParent>();
+            => _secondFigure = _figurinesHandler.GetSwap(_column, _row);
+
+        public void IncreaseColumn()
+        {
+            if (_column < _board.GetLengthColumn)
+            {
+                _column++;
+                SetNewParant();
+            }
+        }
+
+        public void DecreaseColumn()
+        {
+            if (_column >= 0)
+            {
+                _column--;
+                SetNewParant();
+            }
+        }
+
+        public void IncreaseRow()
+        {
+            if (_row < _board.GetLengthRow)
+            {
+                _row++;
+                SetNewParant();
+            }
+        }
+
+        public void DecreaseRow()
+        {
+            if (_row >= 0)
+            {
+                _row--;
+                SetNewParant();
+            }
+        }
+
+        private void SetNewParant()
+            => transform.parent = _board.GetCell(_column, _row);
+
+        private void StartMove()
+            => _movingFigures.StartMove(transform);
+
+        private void SubscribeEvent(bool isFindMatches)
+        {
+            if (isFindMatches)
+            {
+                _movingFigures.MovementOver += OnFindMatches;
+                _secondFigure.GetMovingFigurines.MovementOver += _secondFigure.OnFindMatches;
+            }
+            else
+            {
+                _movingFigures.MovementOver += OnEnabledBoard;
+            }
+        }
+
+        private void OnFindMatches()
+        {
+            _movingFigures.MovementOver -= OnFindMatches;
+            _searchMatches.StartFind(_column, _row);
+        }
+
+        private void OnEnabledBoard()
+        {
+            _movingFigures.MovementOver -= OnEnabledBoard;
+            _board.EnableActiveBoarde();
+        }
+    }
+}
