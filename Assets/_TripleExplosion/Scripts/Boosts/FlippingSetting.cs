@@ -2,18 +2,12 @@ namespace TripleExplosion
 {
     public class FlippingSetting
     {
-        private readonly CheckingMatchNotFound _checkingMatchNotFound;
+        private readonly SwipeMovementFigures _swipeMovementFigures;
 
-        public FlippingSetting(CheckingMatchNotFound checkingMatchNotFound)
-            => _checkingMatchNotFound = checkingMatchNotFound;
-
-        private void OnFlipp()
-        {
-            _checkingMatchNotFound.SetNoReverse();
-            _checkingMatchNotFound.ParametersSet -= OnFlipp;
-        }
+        public FlippingSetting(SwipeMovementFigures swipeMovementFigures)
+            => _swipeMovementFigures = swipeMovementFigures;
 
         public void OnActivateBoost()
-            => _checkingMatchNotFound.ParametersSet += OnFlipp;
+            => _swipeMovementFigures.DisableReverseSwipe();
     }
 }

@@ -7,7 +7,7 @@ namespace TripleExplosion
 {
     public class ReduceFigurine : MonoBehaviour
     {
-        public event Action<List<Transform>> Reduced;
+        public event Action<List<Transform>> ReducedOver;
 
         private readonly float _timeReduce = 0.2f;
 
@@ -34,7 +34,7 @@ namespace TripleExplosion
             foreach (var figurene in figurenes)
                 figurene.localScale = currentScale;
 
-            Reduced?.Invoke(figurenes);
+            ReducedOver?.Invoke(figurenes);
         }
     }
 }

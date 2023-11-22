@@ -7,35 +7,35 @@ namespace TripleExplosion
 {
     public class Falling : MonoBehaviour
     {
-        public event Action FallOver;
-
         private GameBoardHandler _board;
         private ReduceFigurine _reduceFigurine;
-        private MovingFigurines _movingFigurines;
         private ChangingStartingFigures _changingStartingFigures;
         private FigurinesHandler _figurinesHandler;
+        private MovingFigurines _movingFigurines;
+        private RemovingMatches _removingMatches;
+        private FixingNoMoves _fixingNoMoves;
         private readonly List<List<Transform>> _figurinesInColumn = new List<List<Transform>>();
 
         private SearchMatches _searchMatches;
         private List<Vector2> _movedFigures;
-        private CheckingMatchNotFound _checkingMatchNotFound;
 
         [Inject]
         private void Construct(GameBoardHandler board,
                                ReduceFigurine reduceFigurine,
                                ChangingStartingFigures changingStartingFigures,
                                SearchMatches searchMatches,
-                               CheckingMatchNotFound checkingMatchNotFound,
-                               FigurinesHandler figurinesHandler)
+                               FigurinesHandler figurinesHandler,
+                               RemovingMatches removingMatches,
+                               FixingNoMoves fixingNoMoves)
         {
             _board = board;
             _reduceFigurine = reduceFigurine;
-            _movingFigurines = new MovingFigurines(this);
             _changingStartingFigures = changingStartingFigures;
-
+            _movingFigurines = new MovingFigurines(this);
             _searchMatches = searchMatches;
-            _checkingMatchNotFound = checkingMatchNotFound;
             _figurinesHandler = figurinesHandler;
+            _removingMatches = removingMatches;
+            _fixingNoMoves = fixingNoMoves;
         }
 
         private void Awake()
@@ -89,20 +89,6 @@ namespace TripleExplosion
                 }
             }
 
-            /*for (int i = 0; i < _figurinesInColumn.Count; i++)
-            {
-                if (_figurinesInColumn[i].Count > 0)
-                {
-                    for (int t = 0; t < _figurinesInColumn[i].Count; t++)
-                    {
-                        Vector2 vector = _board.GetÑoordinatesCell(_figurinesInColumn[i][t].parent);
-                        Debug.Log(vector);
-                    }
-                    Debug.Log("=====");
-                }
-            }
-            Debug.Log("êîíåö");*/
-
             SwapFigurines();
             ChangeColor();
             OnFall();
@@ -138,7 +124,6 @@ namespace TripleExplosion
 
         private void OnFall()
         {
-            Debug.Log("OnFall");
             List<Transform> moveFigurines = new List<Transform>();
 
             for (int i = 0; i < _figurinesInColumn.Count; i++)
@@ -174,31 +159,15 @@ namespace TripleExplosion
             }
             else
             {
-                _checkingMatchNotFound.ResetFinded();
+                _removingMatches.Clear();
 
                 foreach (var figure in _movedFigures)
                     _searchMatches.StartFind((int)figure.x, (int)figure.y);
 
-                if (!_checkingMatchNotFound.IsFind)
-                {
-                    for (int column = 0; column < _board.GetLengthColumn; column++)
-                    {
-                        for (int row = 0; row < _board.GetLengthRow; row++)
-                        {
-                            Sprite sprite1 = _figurinesHandler.GetRender(column, row).sprite;
-                            Sprite sprite2 = _board.GetCell(column, row).GetChild(0).GetComponent<SpriteRenderer>().sprite;
-
-                            if (sprite1 != sprite2)
-                            {
-                                Debug.Log(column + " | " + row);
-                                Debug.Log("ðåàëüíûé ñïðàéò: " + sprite2);
-                                Debug.Log("ñïðàéò ÷åðåç ïîåáîòó: " + sprite1);
-                            }
-                        }
-                    }
-
-                    FallOver?.Invoke();
-                }
+                if (_removingMatches.IsNoMath)
+                    _fixingNoMoves.OnCheckAndFix();
+                else
+                    _removingMatches.RemoveFigurines();
             }
         }
 
@@ -207,18 +176,8 @@ namespace TripleExplosion
                                               int column,
                                               int row)
         {
-            //Vector2 oldCoordinates = _board.GetÑoordinatesCell(figurine.parent);
-
             figurine.parent = _board.GetCell(column, row);
-            //_figurinesHandler.SwipeFigurines(column, row, column, (int)oldCoordinates.y);
-            /*Debug.Log(column + " | " + row);
-            Debug.Log((int)oldCoordinates.x + " | " + (int)oldCoordinates.y);
-            Debug.Log("====");*/
-            
             _figurinesHandler.GetSwap(column, row).SetCoordinates();
-
-            //figurine.GetComponent<SwapParent>().SetCoordinates();
-
             moveFigurines.Add(figurine);
 
             _movedFigures.Add(new Vector2(column, row));
@@ -226,13 +185,13 @@ namespace TripleExplosion
 
         private void OnEnable()
         {
-            _reduceFigurine.Reduced += OnSortList;
+            _reduceFigurine.ReducedOver += OnSortList;
             _movingFigurines.MovementOver += OnFall;
         }
 
         private void OnDisable()
         {
-            _reduceFigurine.Reduced -= OnSortList;
+            _reduceFigurine.ReducedOver -= OnSortList;
             _movingFigurines.MovementOver -= OnFall;
         }
     }

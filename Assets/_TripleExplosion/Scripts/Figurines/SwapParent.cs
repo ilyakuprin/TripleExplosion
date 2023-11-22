@@ -6,8 +6,7 @@ namespace TripleExplosion
     public class SwapParent : MonoBehaviour
     {
         private FigurinesHandler _figurinesHandler;
-        private SearchMatches _searchMatches;
-        private MovingFigurines _movingFigures;
+        private SwipeMovementFigures _swipeMovementFigures;
         private GameBoardHandler _board;
         private SwapParent _secondFigure;
         private int _column;
@@ -15,18 +14,16 @@ namespace TripleExplosion
         private readonly float _halfRightAngle = 45f;
         private readonly float _straightAngleWithoutHalfRight = 135f;
 
-        public MovingFigurines GetMovingFigurines { get => _movingFigures; }
         public int GetColumn { get => _column; }
         public int GetRow { get => _row; }
 
         [Inject]
         public void Construct(GameBoardHandler board,
-                              SearchMatches searchMatches,
-                              FigurinesHandler figurinesHandler)
+                              FigurinesHandler figurinesHandler,
+                              SwipeMovementFigures swipeMovementFigures)
         {
             _board = board;
-            _movingFigures = new MovingFigurines(this);
-            _searchMatches = searchMatches;
+            _swipeMovementFigures = swipeMovementFigures;
             _figurinesHandler = figurinesHandler;
         }
 
@@ -38,7 +35,7 @@ namespace TripleExplosion
 
         private void Awake() => SetCoordinates();
 
-        public void ChangeParant(float swipeAngle, bool isFindMatches)
+        public void ChangeParant(float swipeAngle)
         {
             if (swipeAngle > -_halfRightAngle &&
                 swipeAngle <= _halfRightAngle &&
@@ -61,13 +58,14 @@ namespace TripleExplosion
                 _board.EnableActiveBoarde();
                 return;
             }
-
+            
             _figurinesHandler.SwipeFigurines(GetColumn, GetRow,
                                              _secondFigure.GetColumn, _secondFigure.GetRow);
 
-            SubscribeEvent(isFindMatches);
-            StartMove();
-            _secondFigure.StartMove();
+            _swipeMovementFigures.AddFigurine(transform);
+            _swipeMovementFigures.AddFigurine(_secondFigure.transform);
+
+            _swipeMovementFigures.CallMove();
         }
 
         private void RightSwipe()
@@ -99,7 +97,6 @@ namespace TripleExplosion
         }
 
         private void SetSecondFigure()
-            //=> _secondFigure = _board.GetCell(_column, _row).GetChild(0).GetComponent<SwapParent>();
             => _secondFigure = _figurinesHandler.GetSwap(_column, _row);
 
         public void IncreaseColumn()
@@ -140,33 +137,5 @@ namespace TripleExplosion
 
         private void SetNewParant()
             => transform.parent = _board.GetCell(_column, _row);
-
-        private void StartMove()
-            => _movingFigures.StartMove(transform);
-
-        private void SubscribeEvent(bool isFindMatches)
-        {
-            if (isFindMatches)
-            {
-                _movingFigures.MovementOver += OnFindMatches;
-                _secondFigure.GetMovingFigurines.MovementOver += _secondFigure.OnFindMatches;
-            }
-            else
-            {
-                _movingFigures.MovementOver += OnEnabledBoard;
-            }
-        }
-
-        private void OnFindMatches()
-        {
-            _movingFigures.MovementOver -= OnFindMatches;
-            _searchMatches.StartFind(_column, _row);
-        }
-
-        private void OnEnabledBoard()
-        {
-            _movingFigures.MovementOver -= OnEnabledBoard;
-            _board.EnableActiveBoarde();
-        }
     }
 }

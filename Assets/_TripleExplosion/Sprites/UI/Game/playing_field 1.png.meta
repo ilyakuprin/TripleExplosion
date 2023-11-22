@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 46d569e88cbd0f244aba902f466b037e
+guid: 45a284e4d254ec64b9e38cf7bf1fc8b7
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -67,10 +67,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 1024
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -80,8 +80,8 @@ TextureImporter:
   - serializedVersion: 3
     buildTarget: Standalone
     maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
+    resizeAlgorithm: 1
+    textureFormat: 12
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -103,9 +103,9 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
+    maxTextureSize: 1024
+    resizeAlgorithm: 1
+    textureFormat: 50
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -117,13 +117,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Circles_0
+      name: playing_field 1_12
       rect:
         serializedVersion: 2
-        x: 80
-        y: 328
-        width: 205
-        height: 205
+        x: 1614
+        y: 1519
+        width: 1158
+        height: 389
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,20 +131,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0de5088bbbcbbe440b9f4af1455bf3c9
-      internalID: -650480057
+      spriteID: fbc668964eda18b4abda92eea9dd519a
+      internalID: -1499514233
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Circles_1
+      name: playing_field 1_22
       rect:
         serializedVersion: 2
-        x: 359
-        y: 328
-        width: 205
-        height: 205
+        x: 202
+        y: 27
+        width: 1370
+        height: 1685
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -152,20 +152,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d477091510de0084cbd3d108753baf23
-      internalID: 1154788403
+      spriteID: 8f3725fef0f1ec841bbde282131d17f2
+      internalID: 1623814883
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Circles_2
+      name: playing_field 1_29
       rect:
         serializedVersion: 2
-        x: 638
-        y: 328
-        width: 205
-        height: 205
+        x: 1939
+        y: 195
+        width: 909
+        height: 912
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -173,113 +173,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1dee03cf4e896dd489b13d953266fe6c
-      internalID: -1257036230
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Circles_3
-      rect:
-        serializedVersion: 2
-        x: 917
-        y: 328
-        width: 205
-        height: 205
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 01a3a1181b1ddbc46aa78ac34aebcfe0
-      internalID: -38010005
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Circles_4
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 65
-        width: 205
-        height: 205
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c0b49e92f5c986f43b426137affeb1b2
-      internalID: 1787158590
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Circles_5
-      rect:
-        serializedVersion: 2
-        x: 359
-        y: 65
-        width: 205
-        height: 205
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9a1791b9c2c9490458a32adf22024990
-      internalID: 1235785794
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Circles_6
-      rect:
-        serializedVersion: 2
-        x: 638
-        y: 65
-        width: 205
-        height: 205
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: be0e26dc2bd43694a999345a3ed6351e
-      internalID: 893093284
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Circles_7
-      rect:
-        serializedVersion: 2
-        x: 917
-        y: 65
-        width: 205
-        height: 205
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 69b2ab96fcd163c4e9edca93f49e324e
-      internalID: 397760744
+      spriteID: 17cfafc5c3a593645b3cf6d1d5a17185
+      internalID: 1980548485
       vertices: []
       indices: 
       edges: []
@@ -295,14 +190,51 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Circles_6: 893093284
-      Circles_3: -38010005
-      Circles_7: 397760744
-      Circles_0: -650480057
-      Circles_2: -1257036230
-      Circles_4: 1787158590
-      Circles_5: 1235785794
-      Circles_1: 1154788403
+      playing_field 1_4: 727028159
+      playing_field 1_19: -762010249
+      playing_field 1_29: 1980548485
+      playing_field 1_8: 78901688
+      playing_field 1_3: -133866106
+      playing_field 1_18: 453984413
+      playing_field 1_10: -1789076261
+      playing_field 1_9: 2108693005
+      playing_field 1_27: 1294886031
+      playing_field 1_12: -1499514233
+      playing_field 1_14: 1538888428
+      playing_field 1_41: 1692379162
+      playing_field 1_1: 920881539
+      playing_field 1_15: -803633741
+      playing_field 1_32: -1280177810
+      playing_field 1_7: -1346810015
+      playing_field 1_37: 506423900
+      playing_field 1_2: -428546396
+      playing_field 1_23: -1570087149
+      playing_field 1_22: 1623814883
+      playing_field 1_35: 91386804
+      playing_field 1_24: 1271980698
+      playing_field 1_26: 1155007677
+      playing_field 1_30: -1922618758
+      playing_field 1_33: 1659158734
+      playing_field 1_6: -510393813
+      playing_field 1_20: 461425121
+      playing_field 1_25: 1893024585
+      playing_field 1_21: -1101645161
+      playing_field 1_40: -2097415994
+      playing_field 1_34: 4763137
+      playing_field 1_28: -1251877019
+      playing_field 1_17: 1701773110
+      playing_field 1_39: 1472622867
+      playing_field 1_5: -1572142332
+      playing_field 1_44: 421195254
+      playing_field 1_0: 1629001667
+      playing_field 1_42: 1966645541
+      playing_field 1_38: 891755306
+      playing_field 1_11: -1602568029
+      playing_field 1_13: 1212584755
+      playing_field 1_36: -1995911838
+      playing_field 1_43: 92728827
+      playing_field 1_16: -643490156
+      playing_field 1_31: 2078017216
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

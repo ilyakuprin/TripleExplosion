@@ -10,6 +10,7 @@ namespace TripleExplosion
         [SerializeField] private Transform _parent;
         [SerializeField] private ReduceFigurine _reduceFigurine;
         [SerializeField] private Falling _falling;
+        [SerializeField] private SwipeMovementFigures _swipeMovementFigures;
 
         public override void InstallBindings()
         {
@@ -25,19 +26,20 @@ namespace TripleExplosion
             Container.Bind<Transform>().FromInstance(_parent).AsSingle();
             Container.Bind<ReduceFigurine>().FromInstance(_reduceFigurine).AsSingle();
             Container.Bind<Falling>().FromInstance(_falling).AsSingle();
+            Container.Bind<SwipeMovementFigures>().FromInstance(_swipeMovementFigures).AsSingle();
         }
 
         private void BindInterfaces()
         {
             Container.BindInterfacesAndSelfTo<GameBoardHandler>().AsSingle();
             Container.BindInterfacesAndSelfTo<SpawningFigures>().AsSingle();
-            Container.BindInterfacesAndSelfTo<CheckingMatchNotFound>().AsSingle();
             Container.BindInterfacesAndSelfTo<SearchMatches>().AsSingle();
             Container.BindInterfacesAndSelfTo<RemovingMatches>().AsSingle();
             Container.BindInterfacesAndSelfTo<CheckingAllMoves>().AsSingle();
             Container.BindInterfacesAndSelfTo<ChangingStartingFigures>().AsSingle();
             Container.BindInterfacesAndSelfTo<FixingNoMoves>().AsSingle();
             Container.BindInterfacesAndSelfTo<FigurinesHandler>().AsSingle();
+            Container.BindInterfacesAndSelfTo<PointCounter>().AsSingle();
         }
 
         private void AssignInitializationOrder()

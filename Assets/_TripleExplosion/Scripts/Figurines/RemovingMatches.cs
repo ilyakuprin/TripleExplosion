@@ -19,6 +19,17 @@ namespace TripleExplosion
             _reduceFigurine = reduceFigurine;
         }
 
+        public bool IsNoMath
+        {
+            get
+            {
+                if (_redusedFigurines.Count > 0)
+                    return false;
+                else
+                    return true;
+            }
+        }
+
         private void OnRemoveMatch()
         {
             List<Transform> figurines = new List<Transform>();
@@ -35,10 +46,10 @@ namespace TripleExplosion
 
             figurines.Add(_searchMatches.GetMainFigurine);
 
-            CheckAndReduce(figurines);
+            CheckAndAdd(figurines);
         }
 
-        private void CheckAndReduce(List<Transform> figurines)
+        private void CheckAndAdd(List<Transform> figurines)
         {
             for (int k = 0; k < _redusedFigurines.Count; k++)
             {
@@ -46,43 +57,27 @@ namespace TripleExplosion
                 {
                     if (figurines[i] == _redusedFigurines[k])
                     {
-                        figurines.Remove(figurines[i]);
+                        figurines.RemoveAt(i);
                     }
                 }
             }
 
             if (figurines.Count > 0)
-            {
                 _redusedFigurines.AddRange(figurines);
-                _reduceFigurine.StartReduce(figurines);
-            }
         }
 
-        private void RemoveFromListRedused(List<Transform> figurines)
+        public void RemoveFigurines()
         {
-            foreach (var figurine1 in figurines)
-            {
-                foreach (var figurine2 in _redusedFigurines)
-                {
-                    if (figurine1 == figurine2)
-                    {
-                        _redusedFigurines.Remove(figurine2);
-                        break;
-                    }
-                }
-            }
+            if (_redusedFigurines.Count > 0)
+                _reduceFigurine.StartReduce(_redusedFigurines);
         }
+
+        public void Clear() => _redusedFigurines.Clear();
 
         public void Initialize()
-        {
-            _searchMatches.MatchFounded += OnRemoveMatch;
-            _reduceFigurine.Reduced += RemoveFromListRedused;
-        }
+            => _searchMatches.MatchFounded += OnRemoveMatch;
 
         public void Dispose()
-        {
-            _searchMatches.MatchFounded -= OnRemoveMatch;
-            _reduceFigurine.Reduced -= RemoveFromListRedused;
-        }
+            => _searchMatches.MatchFounded -= OnRemoveMatch;
     }
 }

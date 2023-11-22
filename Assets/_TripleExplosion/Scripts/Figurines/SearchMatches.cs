@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace TripleExplosion
@@ -10,7 +9,6 @@ namespace TripleExplosion
         public event Action MatchFounded;
 
         private readonly GameBoardHandler _board;
-        private readonly CheckingMatchNotFound _checkingMatchNotFound;
         private readonly FigurinesHandler _figurinesHandler;
         private readonly int _minNumberCoincidencesWithoutMain = 2;
 
@@ -20,10 +18,8 @@ namespace TripleExplosion
         private List<Transform> _verticalFigurines;
 
         public SearchMatches(GameBoardHandler board,
-                             CheckingMatchNotFound checkingMatchNotFound,
                              FigurinesHandler figurinesHandler)
         {
-            _checkingMatchNotFound = checkingMatchNotFound;
             _board = board;
             _figurinesHandler = figurinesHandler;
         }
@@ -49,6 +45,12 @@ namespace TripleExplosion
                 throw new ArgumentOutOfRangeException();
         }
 
+        public void StartFind(Transform figurine)
+        {
+            Vector2 cell = _board.Get—oordinatesCell(figurine.parent);
+            StartFind((int)cell.x, (int)cell.y);
+        }
+
         public void StartFind(int column, int row)
         {
             _horizontalFigurines = new List<Transform>();
@@ -61,7 +63,6 @@ namespace TripleExplosion
         private void FindMatches(int column, int row)
         {
             _mainTransform = _board.GetCell(column, row).GetChild(0);
-            //_mainSprite = _mainTransform.GetComponent<SpriteRenderer>().sprite;
             _mainSprite = _figurinesHandler.GetRender(column, row).sprite;
 
             FindMatchesUp(column, row);
@@ -72,17 +73,9 @@ namespace TripleExplosion
 
         private void CheckMatches()
         {
-            _horizontalFigurines.Distinct();
-            _verticalFigurines.Distinct();
-
             if (_horizontalFigurines.Count >= _minNumberCoincidencesWithoutMain ||
                 _verticalFigurines.Count >= _minNumberCoincidencesWithoutMain)
-            {
-                _checkingMatchNotFound.Finded();
                 MatchFounded?.Invoke();
-            }
-            else
-                _checkingMatchNotFound.MatchNotFounded();
         }
 
         private void FindMatchesRight(int column, int row)

@@ -8,7 +8,6 @@ namespace TripleExplosion
     {
         private readonly GameBoardHandler _board;
         private readonly ReduceFigurine _reduceFigurine;
-        private readonly CheckingMatchNotFound _checkingMatchNotFound;
 
         private int _explosionWidth = 3;
         private int _explosionHeight = 3;
@@ -18,12 +17,10 @@ namespace TripleExplosion
         private int _maxHeight;
 
         public BombSettings(GameBoardHandler board,
-                            ReduceFigurine reduceFigurine,
-                            CheckingMatchNotFound checkingMatchNotFound)
+                            ReduceFigurine reduceFigurine)
         {
             _board = board;
             _reduceFigurine = reduceFigurine;
-            _checkingMatchNotFound = checkingMatchNotFound;
         }
 
         public void Initialize()
@@ -44,7 +41,6 @@ namespace TripleExplosion
             if (_isActive && _board.IsBoardAcrive)
             {
                 _isActive = false;
-                _checkingMatchNotFound.SetNoReverse();
                 _board.DisableActiveBoarde();
                 List<Transform> figurines = new List<Transform>();
                 FillList(figurines, column, row);

@@ -1,0 +1,102 @@
+using System.Collections.Generic;
+using UnityEngine;
+using Zenject;
+
+namespace TripleExplosion
+{
+    public class SwipeMovementFigures : MonoBehaviour
+    {
+        private MovingFigurines _movingFigurines;
+        private GameBoardHandler _board;
+        private SearchMatches _searchMatches;
+        private RemovingMatches _removingMatches;
+
+        private readonly List<Transform> _figurines = new List<Transform>();
+        private readonly float _straightAngle = 180f;
+
+        private bool _needSearch = true;
+        private bool _needReverseSwipe = true;
+        private SwapParent _swapFigurine;
+        private float _swipeAngle;
+
+        [Inject]
+        private void Construct(GameBoardHandler board,
+                               SearchMatches searchMatches,
+                               RemovingMatches removingMatches)
+        {
+            _movingFigurines = new MovingFigurines(this);
+            _board = board;
+            _searchMatches = searchMatches;
+            _removingMatches = removingMatches;
+        }
+
+        public void DisableReverseSwipe() => _needReverseSwipe = false;
+
+        public void SetParameters(SwapParent figurine, float swipeAngle)
+        {
+            _swapFigurine = figurine;
+
+            if (swipeAngle > 0)
+                _swipeAngle = swipeAngle - _straightAngle;
+            else
+                _swipeAngle = swipeAngle + _straightAngle;
+        }
+
+        public void AddFigurine(Transform figurine) => _figurines.Add(figurine);
+
+        public void CallMove()
+        {
+            if (_figurines.Count > 0)
+                _movingFigurines.StartMove(_figurines);
+        }
+
+        private void ClearList() => _figurines.Clear();
+
+        private void Search()
+        {
+            if (_needSearch)
+            {
+                foreach (Transform figurine in _figurines)
+                    _searchMatches.StartFind(figurine);
+
+                ClearList();
+
+                if (_removingMatches.IsNoMath)
+                {
+                    if (_needReverseSwipe)
+                    {
+                        _needSearch = false;
+                        _swapFigurine.ChangeParant(_swipeAngle);
+                    }
+                    else
+                    {
+                        _board.EnableActiveBoarde();
+                    }
+                }
+                else
+                {
+                    _removingMatches.RemoveFigurines();
+                }
+
+                if (!_needReverseSwipe)
+                    _needReverseSwipe = true;
+            }
+            else
+            {
+                ClearList();
+                _needSearch = true;
+                _board.EnableActiveBoarde();
+            }
+        }
+
+        private void OnEnable()
+        {
+            _movingFigurines.MovementOver += Search;
+        }
+
+        private void OnDisable()
+        {
+            _movingFigurines.MovementOver -= Search;
+        }
+    }
+}

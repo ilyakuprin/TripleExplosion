@@ -8,7 +8,7 @@ namespace TripleExplosion
     {
         [SerializeField] private SwapParent _swapParent;
         private GameBoardHandler _board;
-        private CheckingMatchNotFound _checkingMatchNotFound;
+        private SwipeMovementFigures _swipeMovementFigures;
         private Vector2 _touchDownPosition;
         private Vector2 _touchUpPosition;
 
@@ -17,10 +17,10 @@ namespace TripleExplosion
 
         [Inject]
         public void Construct(GameBoardHandler board,
-                              CheckingMatchNotFound checkingMatchNotFound)
+                              SwipeMovementFigures swipeMovementFigures)
         {
             _board = board;
-            _checkingMatchNotFound = checkingMatchNotFound;
+            _swipeMovementFigures = swipeMovementFigures;
         }
 
         private void OnMouseDown()
@@ -40,8 +40,8 @@ namespace TripleExplosion
                     _board.DisableActiveBoarde();
 
                     float swipeAngle = CalculeteAngleSwipe();
-                    _checkingMatchNotFound.SetParameters(_swapParent, swipeAngle);
-                    _swapParent.ChangeParant(swipeAngle, true);
+                    _swipeMovementFigures.SetParameters(_swapParent, swipeAngle);
+                    _swapParent.ChangeParant(swipeAngle);
                 }
             }
         }
