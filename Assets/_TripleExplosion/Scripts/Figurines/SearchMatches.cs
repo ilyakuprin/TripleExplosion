@@ -47,7 +47,7 @@ namespace TripleExplosion
 
         public void StartFind(Transform figurine)
         {
-            Vector2 cell = _board.Get—oordinatesCell(figurine.parent);
+            Vector2 cell = _board.GetCoordinatesCell(figurine.parent);
             StartFind((int)cell.x, (int)cell.y);
         }
 

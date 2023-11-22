@@ -51,7 +51,7 @@ namespace TripleExplosion
             //Fill the _figurinesInColumn array by columns. 
             foreach (Transform figurine in figurines)
             {
-                Vector2 coordinates = _board.Get—oordinatesCell(figurine.parent);
+                Vector2 coordinates = _board.GetCoordinatesCell(figurine.parent);
                 int x = (int)coordinates.x;
                 _figurinesInColumn[x].Add(figurine);
                 figurine.gameObject.SetActive(false);
@@ -65,7 +65,7 @@ namespace TripleExplosion
                     for (int t = 0; t < _figurinesInColumn[i].Count - 1; t++)
                     {
                         Transform maxFigurine = _figurinesInColumn[i][t];
-                        Vector2 coordinates = _board.Get—oordinatesCell(maxFigurine.parent);
+                        Vector2 coordinates = _board.GetCoordinatesCell(maxFigurine.parent);
                         int maxRow = (int)coordinates.y;
 
                         int maxIndex = t;
@@ -73,7 +73,7 @@ namespace TripleExplosion
                         for (int k = t + 1; k < _figurinesInColumn[i].Count; k++)
                         {
                             Transform nextFigurine = _figurinesInColumn[i][k];
-                            coordinates = _board.Get—oordinatesCell(nextFigurine.parent);
+                            coordinates = _board.GetCoordinatesCell(nextFigurine.parent);
                             int currentRow = (int)coordinates.y;
 
                             if (currentRow > maxRow)
@@ -100,7 +100,7 @@ namespace TripleExplosion
             {
                 for (int k = 0; k < _figurinesInColumn[i].Count; k++)
                 {
-                    Vector2 startCell = _board.Get—oordinatesCell(_figurinesInColumn[i][k].parent);
+                    Vector2 startCell = _board.GetCoordinatesCell(_figurinesInColumn[i][k].parent);
                     int startRow = (int)startCell.y;
 
                     for (int t = 0; t < _board.GetLengthRow - startRow - 1; t++)
@@ -132,7 +132,7 @@ namespace TripleExplosion
                 {
                     Transform currentFigurine = _figurinesInColumn[i][0];
 
-                    Vector2 coordinates = _board.Get—oordinatesCell(currentFigurine.parent);
+                    Vector2 coordinates = _board.GetCoordinatesCell(currentFigurine.parent);
                     int row = (int)coordinates.y;
 
                     SetParametersForFigurine(moveFigurines, currentFigurine, i, _board.GetLengthRow - 1);

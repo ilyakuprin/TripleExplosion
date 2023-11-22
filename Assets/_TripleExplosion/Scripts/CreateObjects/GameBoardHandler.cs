@@ -36,7 +36,7 @@ namespace TripleExplosion
                 throw new ArgumentOutOfRangeException();
         }
 
-        public Vector2 Get—oordinatesCell(Transform cell)
+        public Vector2 GetCoordinatesCell(Transform cell)
         {
             for (int column = 0; column < _numColumns; column++)
             {
