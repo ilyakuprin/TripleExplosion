@@ -10,14 +10,17 @@ namespace TripleExplosion
         private readonly GameBoardHandler _board;
         private readonly SearchMatches _searchMatches;
         private readonly RemovingMatches _removingMatches;
+        private readonly FixingNoMoves _fixingNoMoves;
 
         public ColorChangingSetting(GameBoardHandler board,
                                     SearchMatches searchMatches,
-                                    RemovingMatches removingMatches)
+                                    RemovingMatches removingMatches,
+                                    FixingNoMoves fixingNoMoves)
         {
             _board = board;
             _searchMatches = searchMatches;
             _removingMatches = removingMatches;
+            _fixingNoMoves = fixingNoMoves;
         }
 
         public void TryUsingBoost(SpriteRenderer spriteRenderer, int column, int row)
@@ -30,7 +33,11 @@ namespace TripleExplosion
                     spriteRenderer.sprite = _newSprite;
                     _isActive = false;
                     _searchMatches.StartFind(column, row);
-                    _removingMatches.RemoveFigurines();
+
+                    if (!_removingMatches.IsNoMath)
+                        _removingMatches.RemoveFigurines();
+                    else
+                        _fixingNoMoves.OnCheckAndFix();
                 }
             }
         }

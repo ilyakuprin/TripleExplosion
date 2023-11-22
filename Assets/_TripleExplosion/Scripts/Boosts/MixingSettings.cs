@@ -9,30 +9,27 @@ namespace TripleExplosion
         private readonly ReduceFigurine _reduceFigurine;
 
         public MixingSettings(GameBoardHandler board,
-                      ReduceFigurine reduceFigurine)
+                              ReduceFigurine reduceFigurine)
         {
             _board = board;
             _reduceFigurine = reduceFigurine;
         }
 
-        public void OnMix()
+        public void Mix()
         {
-            if (_board.IsBoardAcrive)
+            _board.DisableActiveBoarde();
+            List<Transform> figurines = new List<Transform>();
+
+            for (int column = 0; column < _board.GetLengthColumn; column++)
             {
-                _board.DisableActiveBoarde();
-                List<Transform> figurines = new List<Transform>();
-
-                for (int column = 0; column < _board.GetLengthColumn; column++)
+                for (int row = 0; row < _board.GetLengthRow; row++)
                 {
-                    for (int row = 0; row < _board.GetLengthRow; row++)
-                    {
-                        Transform figurune = _board.GetCell(column, row).GetChild(0);
-                        figurines.Add(figurune);
-                    }
+                    Transform figurune = _board.GetCell(column, row).GetChild(0);
+                    figurines.Add(figurune);
                 }
-
-                _reduceFigurine.StartReduce(figurines);
             }
+
+            _reduceFigurine.StartReduce(figurines);
         }
     }
 }

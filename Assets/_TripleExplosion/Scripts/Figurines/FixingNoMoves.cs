@@ -19,7 +19,7 @@ namespace TripleExplosion
         {
             if (!_checkingAllMoves.CheckMoves())
             {
-                _mixingSettings.OnMix();
+                _mixingSettings.Mix();
             }
             else
             {

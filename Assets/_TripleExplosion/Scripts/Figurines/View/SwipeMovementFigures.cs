@@ -10,6 +10,7 @@ namespace TripleExplosion
         private GameBoardHandler _board;
         private SearchMatches _searchMatches;
         private RemovingMatches _removingMatches;
+        private FixingNoMoves _fixingNoMoves;
 
         private readonly List<Transform> _figurines = new List<Transform>();
         private readonly float _straightAngle = 180f;
@@ -22,12 +23,14 @@ namespace TripleExplosion
         [Inject]
         private void Construct(GameBoardHandler board,
                                SearchMatches searchMatches,
-                               RemovingMatches removingMatches)
+                               RemovingMatches removingMatches,
+                               FixingNoMoves fixingNoMoves)
         {
             _movingFigurines = new MovingFigurines(this);
             _board = board;
             _searchMatches = searchMatches;
             _removingMatches = removingMatches;
+            _fixingNoMoves = fixingNoMoves;
         }
 
         public void DisableReverseSwipe() => _needReverseSwipe = false;
@@ -70,7 +73,7 @@ namespace TripleExplosion
                     }
                     else
                     {
-                        _board.EnableActiveBoarde();
+                        _fixingNoMoves.OnCheckAndFix();
                     }
                 }
                 else

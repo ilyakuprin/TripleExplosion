@@ -9,9 +9,10 @@ namespace TripleExplosion
     {
         public event Action PointAdded;
 
-        private int _counter;
         private readonly ReduceFigurine _reduceFigurine;
         private readonly int _rewardForFigurine = 1;
+
+        private int _counter;
 
         public PointCounter(ReduceFigurine reduceFigurine)
             => _reduceFigurine = reduceFigurine;

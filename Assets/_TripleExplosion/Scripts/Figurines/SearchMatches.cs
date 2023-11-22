@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace TripleExplosion
 {
     public class SearchMatches
     {
-        public event Action MatchFounded;
+        public event Action<List<Transform>> MatchFounded;
 
         private readonly GameBoardHandler _board;
         private readonly FigurinesHandler _figurinesHandler;
@@ -24,10 +25,8 @@ namespace TripleExplosion
             _figurinesHandler = figurinesHandler;
         }
 
-        public int GetMinNumberCoincidencesWithoutMain { get => _minNumberCoincidencesWithoutMain; }
-        public int GetLengthHorizontal { get => _horizontalFigurines.Count; }
-        public int GetLengthVertical { get => _verticalFigurines.Count; }
-        public Transform GetMainFigurine { get => _mainTransform; }
+        private int GetLengthHorizontal { get => _horizontalFigurines.Count; }
+        private int GetLengthVertical { get => _verticalFigurines.Count; }
 
         public Transform GetTransformInHorizontal(int index)
         {
@@ -57,7 +56,8 @@ namespace TripleExplosion
             _verticalFigurines = new List<Transform>();
 
             FindMatches(column, row);
-            CheckMatches();
+            if (IsMatch())
+                AddMatch();
         }
 
         private void FindMatches(int column, int row)
@@ -71,11 +71,32 @@ namespace TripleExplosion
             FindMatchesLeft(column, row);
         }
 
-        private void CheckMatches()
+        private bool IsMatch()
         {
             if (_horizontalFigurines.Count >= _minNumberCoincidencesWithoutMain ||
                 _verticalFigurines.Count >= _minNumberCoincidencesWithoutMain)
-                MatchFounded?.Invoke();
+                return true;
+            else
+                return false;
+        }
+
+        private void AddMatch()
+        {
+            List<Transform> figurines = new List<Transform>();
+
+            int lengthHorizontal = GetLengthHorizontal;
+            if (lengthHorizontal >= _minNumberCoincidencesWithoutMain)
+                for (int i = 0; i < lengthHorizontal; i++)
+                    figurines.Add(GetTransformInHorizontal(i));
+
+            int lengthVertical = GetLengthVertical;
+            if (lengthVertical >= _minNumberCoincidencesWithoutMain)
+                for (int i = 0; i < lengthVertical; i++)
+                    figurines.Add(GetTransformInVertical(i));
+
+            figurines.Add(_mainTransform);
+
+            MatchFounded?.Invoke(figurines);
         }
 
         private void FindMatchesRight(int column, int row)

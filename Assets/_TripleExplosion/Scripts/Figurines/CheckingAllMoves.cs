@@ -21,7 +21,9 @@ namespace TripleExplosion
                 for (int row = 0; row < _board.GetLengthRow - 2; row++)
                 {
                     if (CheckHorizontal(column, row) || CheckVertical(column, row))
+                    {
                         return true;
+                    }
                 }
             }
 
