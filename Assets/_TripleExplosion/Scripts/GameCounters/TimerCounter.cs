@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Net;
 using TMPro;
 using UnityEngine;
 using Zenject;
@@ -15,6 +14,7 @@ namespace TripleExplosion
         private Timer _timer;
         private RemovingMatches _removingMatches;
         private ReduceFigurine _reduceFigurine;
+        private BombSettings _bombSettings;
         private int _counterExtraTime;
 
         private readonly int _minutesInHour = 60;
@@ -31,10 +31,12 @@ namespace TripleExplosion
 
         [Inject]
         private void Construct(RemovingMatches removingMatches,
-                               ReduceFigurine reduceFigurine)
+                               ReduceFigurine reduceFigurine,
+                               BombSettings bombSettings)
         {
             _removingMatches = removingMatches;
             _reduceFigurine = reduceFigurine;
+            _bombSettings = bombSettings;
         }
 
         private void Awake()
@@ -73,6 +75,7 @@ namespace TripleExplosion
 
         private void OnEnable()
         {
+            _bombSettings.ListFilled += CalculateExtraTime;
             _removingMatches.MatchAdded += CalculateExtraTime;
             _reduceFigurine.ReducedOver += AddExtraTime;
             _timer.TimeUpdated += ChangeTimerUi;
@@ -81,6 +84,7 @@ namespace TripleExplosion
 
         private void OnDisable()
         {
+            _bombSettings.ListFilled -= CalculateExtraTime;
             _removingMatches.MatchAdded -= CalculateExtraTime;
             _reduceFigurine.ReducedOver -= AddExtraTime;
             _timer.TimeUpdated -= ChangeTimerUi;
