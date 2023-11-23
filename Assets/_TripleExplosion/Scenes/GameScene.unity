@@ -344,7 +344,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canvasTimerOver: {fileID: 1318906244}
   _textUi: {fileID: 10555439}
-  _startTime: 90
+  _startTime: 60
 --- !u!114 &29978020
 MonoBehaviour:
   m_ObjectHideFlags: 0

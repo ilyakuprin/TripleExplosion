@@ -21,11 +21,11 @@ namespace TripleExplosion
 
         private readonly Dictionary<int, int> _extraTime = new Dictionary<int, int>()
         {
-            { 3, 5 },
-            { 4, 6 },
-            { 5, 10 },
-            { 6, 12 },
-            { 7, 15 },
+            { 3, 1 },
+            { 4, 1 },
+            { 5, 3 },
+            { 6, 4 },
+            { 7, 10 },
             { 9, 9 },
         };
 
