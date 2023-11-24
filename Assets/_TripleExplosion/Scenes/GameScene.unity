@@ -3805,7 +3805,7 @@ GameObject:
   - component: {fileID: 1077715696}
   - component: {fileID: 1077715699}
   m_Layer: 5
-  m_Name: Swap
+  m_Name: Flipping
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4456,7 +4456,7 @@ GameObject:
   - component: {fileID: 1289207294}
   - component: {fileID: 1289207293}
   - component: {fileID: 1289207292}
-  - component: {fileID: 1289207295}
+  - component: {fileID: 1289207296}
   m_Layer: 5
   m_Name: Bomb
   m_TagString: Untagged
@@ -4566,7 +4566,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1289207290}
   m_CullTransparentMesh: 1
---- !u!114 &1289207295
+--- !u!114 &1289207296
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4575,7 +4575,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1289207290}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9851f49ef9f3c7a46b3eaf31ed446d2a, type: 3}
+  m_Script: {fileID: 11500000, guid: 6d6685bfa12ff874fb0fcf12f5cd9304, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _button: {fileID: 1289207292}
@@ -6623,6 +6623,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d2e942ceb6afc14cb931a369e899f05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _boostButton:
+  - {fileID: 1289207296}
+  - {fileID: 1077715699}
 --- !u!1 &1986284300
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,26 +1,11 @@
-using UnityEngine;
-using UnityEngine.UI;
 using Zenject;
 
 namespace TripleExplosion
 {
-    [RequireComponent(typeof(Button))]
-    public class FlippingButton : MonoBehaviour
+    public class FlippingButton : BoostButton
     {
-        [SerializeField] private Button _button;
-        private FlippingSetting _flipping;
+        [Inject] private readonly FlippingSetting _flipping;
 
-        [Inject]
-        private void Construct(FlippingSetting flipping)
-            => _flipping = flipping;
-
-        private void OnEnable()
-            => _button.onClick.AddListener(_flipping.OnActivateBoost);
-
-        private void OnDisable()
-            => _button.onClick.RemoveListener(_flipping.OnActivateBoost);
-
-        private void OnValidate()
-            => _button ??= GetComponent<Button>();
+        private void Awake() => SetBoost(_flipping);
     }
 }

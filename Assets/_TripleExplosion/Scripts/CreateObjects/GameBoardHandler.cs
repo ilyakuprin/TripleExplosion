@@ -6,6 +6,8 @@ namespace TripleExplosion
 {
     public class GameBoardHandler : IInitializable
     {
+        public event Action<bool> ActivationChanged;
+
         private readonly Transform _parent;
         private readonly int _numRows;
         private readonly int _numColumns;
@@ -50,9 +52,11 @@ namespace TripleExplosion
             throw new NotImplementedException();
         }
 
-        public void DisableActiveBoarde() => _isBoardAcrive = false;
-
-        public void EnableActiveBoarde() => _isBoardAcrive = true;
+        public void SetActiveBoarde(bool value)
+        {
+            _isBoardAcrive = value;
+            ActivationChanged?.Invoke(value);
+        }
 
         public void Initialize() => CreateGameBoard();
 

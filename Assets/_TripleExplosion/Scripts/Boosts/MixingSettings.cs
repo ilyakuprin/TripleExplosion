@@ -17,7 +17,7 @@ namespace TripleExplosion
 
         public void Mix()
         {
-            _board.DisableActiveBoarde();
+            _board.SetActiveBoarde(false);
             List<Transform> figurines = new List<Transform>();
 
             for (int column = 0; column < _board.GetLengthColumn; column++)

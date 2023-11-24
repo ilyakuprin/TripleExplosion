@@ -26,7 +26,7 @@ namespace TripleExplosion
             { 5, 3 },
             { 6, 4 },
             { 7, 10 },
-            { 9, 9 },
+            { 9, 9 }
         };
 
         [Inject]

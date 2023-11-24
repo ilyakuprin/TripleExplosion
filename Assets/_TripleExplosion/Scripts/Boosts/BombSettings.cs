@@ -1,11 +1,14 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
 namespace TripleExplosion
 {
-    public class BombSettings : IInitializable
+    public class BombSettings : IInitializable, IBoost
     {
+        public event Action<int> ListFilled;
+
         private readonly GameBoardHandler _board;
         private readonly ReduceFigurine _reduceFigurine;
 
@@ -34,16 +37,25 @@ namespace TripleExplosion
                 _explosionHeight--;
         }
 
-        public void OnEnableBoost() => _isActive = true;
+        public bool GetActiveBoost { get => _isActive; }
+
+        public void SetActiveBoost(bool value)
+            => _isActive = value;
+
+        public void ChangeActiveBoost() => _isActive = !_isActive;
+
+        public void EnableBoost()
+            => _isActive = true;
 
         public void TryUsingBoost(int column, int row)
         {
             if (_isActive && _board.IsBoardAcrive)
             {
                 _isActive = false;
-                _board.DisableActiveBoarde();
+                _board.SetActiveBoarde(false);
                 List<Transform> figurines = new List<Transform>();
                 FillList(figurines, column, row);
+                ListFilled?.Invoke(figurines.Count);
                 _reduceFigurine.StartReduce(figurines);
             }
         }
@@ -64,6 +76,7 @@ namespace TripleExplosion
         private void FillRow(List<Transform> figurines, int column, int row)
         {
             figurines.Add(_board.GetCell(column, row).GetChild(0));
+
             for (int i = 1; i <= (_explosionWidth - 1) / 2; i++)
             {
                 if (column + i < _maxWidth)

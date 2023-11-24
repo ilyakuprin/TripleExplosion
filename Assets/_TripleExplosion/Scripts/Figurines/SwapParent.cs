@@ -55,7 +55,7 @@ namespace TripleExplosion
                 DownSwipe();
             else
             {
-                _board.EnableActiveBoarde();
+                _board.SetActiveBoarde(true);
                 return;
             }
             

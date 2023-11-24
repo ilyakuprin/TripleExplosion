@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace TripleExplosion
 {
-    public class ColorChangingSetting
+    public class ColorChangingSetting : IDisableBoost
     {
         private Sprite _newSprite;
         private bool _isActive = false;
@@ -23,13 +23,25 @@ namespace TripleExplosion
             _fixingNoMoves = fixingNoMoves;
         }
 
+        public void OnSetSprite(Sprite sprite)
+        {
+            ActivateBoost();
+            _newSprite = sprite;
+        }
+
+        public void ActivateBoost()
+            => _isActive = true;
+
+        public void DisableBoost()
+            => _isActive = false;
+
         public void TryUsingBoost(SpriteRenderer spriteRenderer, int column, int row)
         {
             if (_isActive && _board.IsBoardAcrive)
             {
                 if (spriteRenderer.sprite != _newSprite)
                 {
-                    _board.DisableActiveBoarde();
+                    _board.SetActiveBoarde(false);
                     spriteRenderer.sprite = _newSprite;
                     _isActive = false;
                     _searchMatches.StartFind(column, row);
@@ -40,12 +52,6 @@ namespace TripleExplosion
                         _fixingNoMoves.OnCheckAndFix();
                 }
             }
-        }
-
-        public void OnSetSprite(Sprite sprite)
-        {
-            _isActive = true;
-            _newSprite = sprite;
         }
     }
 }

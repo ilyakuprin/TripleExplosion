@@ -37,7 +37,7 @@ namespace TripleExplosion
 
                 if (Mathf.Abs(Vector3.Distance(_touchDownPosition, _touchUpPosition)) > _swipeError)
                 {
-                    _board.DisableActiveBoarde();
+                    _board.SetActiveBoarde(false);
 
                     float swipeAngle = CalculeteAngleSwipe();
                     _swipeMovementFigures.SetParameters(_swapParent, swipeAngle);

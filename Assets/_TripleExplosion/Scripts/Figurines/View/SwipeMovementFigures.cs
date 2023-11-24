@@ -33,7 +33,7 @@ namespace TripleExplosion
             _fixingNoMoves = fixingNoMoves;
         }
 
-        public void DisableReverseSwipe() => _needReverseSwipe = false;
+        public void SetReverseSwipe(bool value) => _needReverseSwipe = value;
 
         public void SetParameters(SwapParent figurine, float swipeAngle)
         {
@@ -82,13 +82,13 @@ namespace TripleExplosion
                 }
 
                 if (!_needReverseSwipe)
-                    _needReverseSwipe = true;
+                    SetReverseSwipe(true);
             }
             else
             {
                 ClearList();
                 _needSearch = true;
-                _board.EnableActiveBoarde();
+                _board.SetActiveBoarde(true);
             }
         }
 
