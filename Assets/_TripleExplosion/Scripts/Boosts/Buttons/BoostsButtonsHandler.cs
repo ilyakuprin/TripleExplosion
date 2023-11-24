@@ -13,10 +13,8 @@ namespace TripleExplosion
         private void DisableOtherBoosts(IBoost boostButton)
         {
             foreach (BoostButton button in _buttons)
-            {
                 if (button.GetBoost != boostButton)
                     button.GetBoost.SetActiveBoost(false);
-            }
         }
 
         public void Initialize()
@@ -24,8 +22,6 @@ namespace TripleExplosion
             foreach (BoostButton button in _buttons)
                 button.GetButton.onClick.AddListener(()
                     => DisableOtherBoosts(button.GetBoost));
-
-            UnityEngine.Debug.Log(_buttons.Length);
         }
 
         public void Dispose()

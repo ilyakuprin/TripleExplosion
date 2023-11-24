@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
@@ -6,6 +7,8 @@ namespace TripleExplosion
 {
     public class SwipeMovementFigures : MonoBehaviour
     {
+        public event Action ReverseSwipeUsed;
+
         private MovingFigurines _movingFigurines;
         private GameBoardHandler _board;
         private SearchMatches _searchMatches;
@@ -19,6 +22,8 @@ namespace TripleExplosion
         private bool _needReverseSwipe = true;
         private SwapParent _swapFigurine;
         private float _swipeAngle;
+
+        public bool IsReverseSwipe { get => _needReverseSwipe; }
 
         [Inject]
         private void Construct(GameBoardHandler board,
@@ -82,7 +87,10 @@ namespace TripleExplosion
                 }
 
                 if (!_needReverseSwipe)
+                {
                     SetReverseSwipe(true);
+                    ReverseSwipeUsed?.Invoke();
+                }
             }
             else
             {

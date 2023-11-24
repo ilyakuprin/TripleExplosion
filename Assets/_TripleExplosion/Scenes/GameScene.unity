@@ -6624,8 +6624,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _boostButton:
-  - {fileID: 1289207296}
   - {fileID: 1077715699}
+  - {fileID: 1289207296}
 --- !u!1 &1986284300
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 namespace TripleExplosion
 {
+    [RequireComponent(typeof(Button))]
     public abstract class BoostButton : MonoBehaviour
     {
         [SerializeField] private Button _button;

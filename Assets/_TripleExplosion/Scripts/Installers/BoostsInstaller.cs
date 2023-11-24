@@ -12,9 +12,9 @@ namespace TripleExplosion
             BindInterfaces();
 
             foreach (BoostButton boost in _boostButton)
-                Container.Bind<BoostButton>().FromInstance(boost).AsSingle();
+                Container.Bind<BoostButton>().FromInstance(boost).AsTransient();
 
-            Container.Bind<BoostButton[]>().FromInstance(_boostButton).AsSingle();
+            Container.BindInterfacesAndSelfTo<BoostsButtonsHandler>().AsSingle();
         }
 
         private void BindInterfaces()

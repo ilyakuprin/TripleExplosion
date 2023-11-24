@@ -1,6 +1,9 @@
+using System;
+using Zenject;
+
 namespace TripleExplosion
 {
-    public class FlippingSetting : IBoost
+    public class FlippingSetting : IInitializable, IDisposable, IBoost
     {
         private readonly SwipeMovementFigures _swipeMovementFigures;
         private bool _isActive = false;
@@ -11,15 +14,21 @@ namespace TripleExplosion
         public bool GetActiveBoost { get => _isActive; }
 
         public void SetActiveBoost(bool value)
-            => _isActive = value;
+        {
+            _isActive = value;
+            _swipeMovementFigures.SetReverseSwipe(!value);
+        }
 
         public void ChangeActiveBoost()
-            => _isActive = !_isActive;
+            => SetActiveBoost(!_isActive);
 
-        public void EnableBoost()
-            => _swipeMovementFigures.SetReverseSwipe(true);
+        private void DisableBoost()
+            => SetActiveBoost(false);
 
-        public void DisableBoost()
-            => _swipeMovementFigures.SetReverseSwipe(false);
+        public void Initialize()
+            => _swipeMovementFigures.ReverseSwipeUsed += DisableBoost;
+
+        public void Dispose()
+            => _swipeMovementFigures.ReverseSwipeUsed -= DisableBoost;
     }
 }
