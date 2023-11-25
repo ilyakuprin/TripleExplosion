@@ -42,12 +42,6 @@ namespace TripleExplosion
         public void SetActiveBoost(bool value)
             => _isActive = value;
 
-        public void ChangeActiveBoost()
-            => SetActiveBoost(!_isActive);
-
-        public void EnableBoost()
-            => _isActive = true;
-
         public void TryUsingBoost(int column, int row)
         {
             if (_isActive && _board.IsBoardAcrive)

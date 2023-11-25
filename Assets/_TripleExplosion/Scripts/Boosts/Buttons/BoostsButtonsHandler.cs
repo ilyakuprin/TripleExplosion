@@ -17,6 +17,12 @@ namespace TripleExplosion
                     button.GetBoost.SetActiveBoost(false);
         }
 
+        public void DisableOtherBoosts()
+        {
+            foreach (BoostButton button in _buttons)
+                button.GetBoost.SetActiveBoost(false);
+        }
+
         public void Initialize()
         {
             foreach (BoostButton button in _buttons)

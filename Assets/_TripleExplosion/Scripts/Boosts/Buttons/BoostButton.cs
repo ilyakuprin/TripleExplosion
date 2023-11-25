@@ -15,12 +15,6 @@ namespace TripleExplosion
         protected void SetBoost(IBoost boost)
             => _boost = boost;
 
-        private void OnEnable()
-            => _button.onClick.AddListener(() => _boost.ChangeActiveBoost());
-
-        private void OnDisable()
-            => _button.onClick.RemoveListener(() => _boost.ChangeActiveBoost());
-
         private void OnValidate()
             => _button ??= GetComponent<Button>();
     }

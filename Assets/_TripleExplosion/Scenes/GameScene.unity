@@ -10009,6 +10009,7 @@ MonoBehaviour:
   _boostButton:
   - {fileID: 1077715699}
   - {fileID: 1289207296}
+  - {fileID: 2138463653}
 --- !u!1 &1986284300
 GameObject:
   m_ObjectHideFlags: 0

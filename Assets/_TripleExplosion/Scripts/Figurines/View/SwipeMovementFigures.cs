@@ -23,8 +23,6 @@ namespace TripleExplosion
         private SwapParent _swapFigurine;
         private float _swipeAngle;
 
-        public bool IsReverseSwipe { get => _needReverseSwipe; }
-
         [Inject]
         private void Construct(GameBoardHandler board,
                                SearchMatches searchMatches,
@@ -101,13 +99,9 @@ namespace TripleExplosion
         }
 
         private void OnEnable()
-        {
-            _movingFigurines.MovementOver += Search;
-        }
+            => _movingFigurines.MovementOver += Search;
 
         private void OnDisable()
-        {
-            _movingFigurines.MovementOver -= Search;
-        }
+            => _movingFigurines.MovementOver -= Search;
     }
 }

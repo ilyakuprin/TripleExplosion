@@ -4,53 +4,53 @@ using Zenject;
 
 namespace TripleExplosion
 {
-    [RequireComponent(typeof(Button))]
-    public class ColorChangingButton : MonoBehaviour
+    public class ColorChangingButton : BoostButton
     {
-        [SerializeField] private Button _button;
         [SerializeField] private GameObject _colorsObject;
         [SerializeField] private Button[] _figurines;
         [SerializeField] private Sprite[] _images;
-        private ColorChangingSetting _colorSetting;
+        [Inject] private readonly ColorChangingSetting _colorSetting;
 
-        [Inject]
-        private void Construct(ColorChangingSetting colorSetting)
-            => _colorSetting = colorSetting;
-
-        private void Awake() => DisableColorPanel();
+        private void Awake()
+        {
+            SetBoost(_colorSetting);
+            DisableColorPanel();
+        }
 
         private void DisableColorPanel() => _colorsObject.SetActive(false);
 
-        private void ChangeActive() => _colorsObject.SetActive(!_colorsObject.activeInHierarchy);
+        private void ChangeActiveColorsObjects() => _colorsObject.SetActive(!_colorsObject.activeInHierarchy);
 
         private void OnEnable()
         {
-            _button.onClick.AddListener(() => ChangeActive());
+            GetButton.onClick.AddListener(() => GetBoost.SetActiveBoost(false));
+            GetButton.onClick.AddListener(() => ChangeActiveColorsObjects());
 
             for (int i = 0; i < _figurines.Length; i++)
             {
                 int index = i;
                 _figurines[index].onClick.AddListener(() => _colorSetting.OnSetSprite(_images[index]));
                 _figurines[index].onClick.AddListener(() => DisableColorPanel());
+                _figurines[index].onClick.AddListener(() => GetBoost.SetActiveBoost(true));
             }
         }
 
         private void OnDisable()
         {
-            _button.onClick.RemoveListener(() => ChangeActive());
+            GetButton.onClick.RemoveListener(() => GetBoost.SetActiveBoost(false));
+            GetButton.onClick.RemoveListener(() => ChangeActiveColorsObjects());
 
             for (int i = 0; i < _figurines.Length; i++)
             {
                 int index = i;
                 _figurines[index].onClick.RemoveListener(() => _colorSetting.OnSetSprite(_images[index]));
                 _figurines[index].onClick.RemoveListener(() => DisableColorPanel());
+                _figurines[index].onClick.AddListener(() => GetBoost.SetActiveBoost(true));
             }
         }
 
         private void OnValidate()
         {
-            _button ??= GetComponent<Button>();
-
             if (_figurines.Length != _images.Length)
                 _images = new Sprite[_figurines.Length];
         }

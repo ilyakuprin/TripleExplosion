@@ -19,9 +19,6 @@ namespace TripleExplosion
             _swipeMovementFigures.SetReverseSwipe(!value);
         }
 
-        public void ChangeActiveBoost()
-            => SetActiveBoost(!_isActive);
-
         private void DisableBoost()
             => SetActiveBoost(false);
 
