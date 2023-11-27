@@ -9,5 +9,7 @@ namespace TripleExplosion
         public int CountSwipe;
         public int CountMix;
         public int CountPaint;
+
+        public int Money;
     }
 }

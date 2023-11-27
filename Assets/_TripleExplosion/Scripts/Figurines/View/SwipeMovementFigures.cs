@@ -23,6 +23,8 @@ namespace TripleExplosion
         private SwapParent _swapFigurine;
         private float _swipeAngle;
 
+        public MovingFigurines GetMovingFigurines { get => _movingFigurines; }
+
         [Inject]
         private void Construct(GameBoardHandler board,
                                SearchMatches searchMatches,

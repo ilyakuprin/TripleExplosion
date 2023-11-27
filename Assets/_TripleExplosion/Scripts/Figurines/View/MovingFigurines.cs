@@ -5,12 +5,13 @@ using UnityEngine;
 
 namespace TripleExplosion
 {
-    public class MovingFigurines
+    public class MovingFigurines : IPause
     {
         public event Action MovementOver;
 
         private readonly MonoBehaviour _monoBeh;
         private readonly float _time = 0.2f;
+        private bool _pause = false;
 
         public MovingFigurines(MonoBehaviour monoBeh)
             => _monoBeh = monoBeh;
@@ -25,12 +26,15 @@ namespace TripleExplosion
 
             while (currentTime < _time)
             {
-                currentTime += Time.deltaTime;
+                if (!_pause)
+                {
+                    currentTime += Time.deltaTime;
 
-                foreach (Transform figurine in figurines)
-                    figurine.localPosition = Vector3.MoveTowards(figurine.localPosition,
-                                                                Vector3.zero,
-                                                                speed * Time.deltaTime);
+                    foreach (Transform figurine in figurines)
+                        figurine.localPosition = Vector3.MoveTowards(figurine.localPosition,
+                                                                    Vector3.zero,
+                                                                    speed * Time.deltaTime);
+                }
 
                 yield return null;
             }
@@ -40,5 +44,8 @@ namespace TripleExplosion
 
             MovementOver?.Invoke();
         }
+
+        public void Pause(bool value)
+            => _pause = value;
     }
 }

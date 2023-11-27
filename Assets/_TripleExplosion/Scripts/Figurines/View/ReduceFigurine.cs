@@ -5,11 +5,12 @@ using UnityEngine;
 
 namespace TripleExplosion
 {
-    public class ReduceFigurine : MonoBehaviour
+    public class ReduceFigurine : MonoBehaviour, IPause
     {
         public event Action<List<Transform>> ReducedOver;
 
         private readonly float _timeReduce = 0.2f;
+        private bool _pause = false;
 
         public void StartReduce(List<Transform> figurenes)
             => StartCoroutine(Reduce(figurenes));
@@ -23,10 +24,13 @@ namespace TripleExplosion
 
             while (currentTime < _timeReduce)
             {
-                currentTime += Time.deltaTime;
+                if (!_pause)
+                {
+                    currentTime += Time.deltaTime;
 
-                foreach(var figurene in figurenes)
-                    figurene.localScale -= Vector3.one * speed * Time.deltaTime;
+                    foreach (var figurene in figurenes)
+                        figurene.localScale -= Vector3.one * speed * Time.deltaTime;
+                }
 
                 yield return null;
             }
@@ -36,5 +40,8 @@ namespace TripleExplosion
 
             ReducedOver?.Invoke(figurenes);
         }
+
+        public void Pause(bool value)
+            => _pause = value;
     }
 }

@@ -18,6 +18,8 @@ namespace TripleExplosion
         private SearchMatches _searchMatches;
         private List<Vector2> _movedFigures;
 
+        public MovingFigurines GetMovingFigurines { get => _movingFigurines; }
+
         [Inject]
         private void Construct(GameBoardHandler board,
                                ReduceFigurine reduceFigurine,

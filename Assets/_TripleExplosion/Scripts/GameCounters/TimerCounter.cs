@@ -6,7 +6,7 @@ using Zenject;
 
 namespace TripleExplosion
 {
-    public class TimerCounter : MonoBehaviour
+    public class TimerCounter : MonoBehaviour, IPause
     {
         [SerializeField] private GameObject _canvasTimerOver;
         [SerializeField] private TextMeshProUGUI _textUi;
@@ -46,7 +46,7 @@ namespace TripleExplosion
         }
 
         private void Start()
-            => _timer.StartTimer();
+            => _timer.SetEnableTimer(true);
 
         private void CalculateExtraTime(int countFigurines)
         {
@@ -72,6 +72,9 @@ namespace TripleExplosion
 
         private void EnabledTimerOver()
             => _canvasTimerOver.SetActive(true);
+
+        public void Pause(bool value)
+            => _timer.SetEnableTimer(!value);
 
         private void OnEnable()
         {
