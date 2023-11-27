@@ -1,16 +1,19 @@
-using System.Runtime.InteropServices;
+using System;
 using UnityEngine;
 
 namespace TripleExplosion
 {
-    public class SaveData : MonoBehaviour
+    [Serializable]
+    public class SaveData
     {
-        [SerializeField] private BoostCounter _bsoostCounter;
-
-        /*[DllImport("__Internal")]
-        private static extern void SaveEntern(string date);
-
-        [DllImport("__Internal")]
-        private static extern void LoadEntern();*/
+        /*[SerializeField] private int _countBomb;
+        [SerializeField] private int _countFlip;
+        [SerializeField] private int _countMix;
+        [SerializeField] private int _countPaint;*/
+        
+        public int CountBomb;
+        public int CountFlip;
+        public int CountMix;
+        public int CountPaint;
     }
 }
