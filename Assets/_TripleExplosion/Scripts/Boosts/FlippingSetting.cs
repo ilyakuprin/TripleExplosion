@@ -5,6 +5,8 @@ namespace TripleExplosion
 {
     public class FlippingSetting : IInitializable, IDisposable, IBoost
     {
+        public event Action<bool> BoostActivitySet;
+
         private readonly SwipeMovementFigures _swipeMovementFigures;
         private bool _isActive = false;
 
@@ -17,6 +19,7 @@ namespace TripleExplosion
         {
             _isActive = value;
             _swipeMovementFigures.SetReverseSwipe(!value);
+            BoostActivitySet?.Invoke(value);
         }
 
         private void DisableBoost()

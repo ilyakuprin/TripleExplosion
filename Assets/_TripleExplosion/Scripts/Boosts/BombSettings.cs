@@ -7,7 +7,9 @@ namespace TripleExplosion
 {
     public class BombSettings : IInitializable, IBoost
     {
+        public event Action<bool> BoostActivitySet;
         public event Action<int> ListFilled;
+        public event Action BombUsed;
 
         private readonly GameBoardHandler _board;
         private readonly ReduceFigurine _reduceFigurine;
@@ -40,18 +42,22 @@ namespace TripleExplosion
         public bool GetActiveBoost { get => _isActive; }
 
         public void SetActiveBoost(bool value)
-            => _isActive = value;
+        {
+            _isActive = value;
+            BoostActivitySet?.Invoke(value);
+        }
 
         public void TryUsingBoost(int column, int row)
         {
             if (_isActive && _board.IsBoardAcrive)
             {
-                _isActive = false;
+                SetActiveBoost(false);
                 _board.SetActiveBoarde(false);
                 List<Transform> figurines = new List<Transform>();
                 FillList(figurines, column, row);
                 ListFilled?.Invoke(figurines.Count);
                 _reduceFigurine.StartReduce(figurines);
+                BombUsed?.Invoke();
             }
         }
 

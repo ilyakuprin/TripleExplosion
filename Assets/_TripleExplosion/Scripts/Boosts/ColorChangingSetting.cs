@@ -1,9 +1,13 @@
+using System;
 using UnityEngine;
 
 namespace TripleExplosion
 {
     public class ColorChangingSetting : IBoost
     {
+        public event Action<bool> BoostActivitySet;
+        public event Action ColorChangeUsed;
+
         private Sprite _newSprite;
         private bool _isActive = false;
 
@@ -32,10 +36,10 @@ namespace TripleExplosion
         }
 
         public void SetActiveBoost(bool value)
-            => _isActive = value;
-
-        public void ChangeActiveBoost()
-            => SetActiveBoost(!_isActive);
+        {
+            _isActive = value;
+            BoostActivitySet?.Invoke(value);
+        }
 
         public void TryUsingBoost(SpriteRenderer spriteRenderer, int column, int row)
         {
@@ -45,13 +49,15 @@ namespace TripleExplosion
                 {
                     _board.SetActiveBoarde(false);
                     spriteRenderer.sprite = _newSprite;
-                    _isActive = false;
+                    SetActiveBoost(false);
                     _searchMatches.StartFind(column, row);
 
                     if (!_removingMatches.IsNoMath)
                         _removingMatches.RemoveFigurines();
                     else
                         _fixingNoMoves.OnCheckAndFix();
+
+                    ColorChangeUsed?.Invoke();
                 }
             }
         }

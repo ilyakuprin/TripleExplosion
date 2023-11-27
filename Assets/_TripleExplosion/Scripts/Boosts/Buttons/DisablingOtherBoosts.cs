@@ -3,11 +3,11 @@ using Zenject;
 
 namespace TripleExplosion
 {
-    public class BoostsButtonsHandler : IInitializable, IDisposable
+    public class DisablingOtherBoosts : IInitializable, IDisposable
     {
         private readonly BoostButton[] _buttons;
 
-        public BoostsButtonsHandler(BoostButton[] boostButtons)
+        public DisablingOtherBoosts(BoostButton[] boostButtons)
             => _buttons = boostButtons;
 
         private void DisableOtherBoosts(IBoost boostButton)

@@ -31,7 +31,6 @@ namespace TripleExplosion
                 int index = i;
                 _figurines[index].onClick.AddListener(() => _colorSetting.OnSetSprite(_images[index]));
                 _figurines[index].onClick.AddListener(() => DisableColorPanel());
-                _figurines[index].onClick.AddListener(() => GetBoost.SetActiveBoost(true));
             }
         }
 
@@ -45,7 +44,6 @@ namespace TripleExplosion
                 int index = i;
                 _figurines[index].onClick.RemoveListener(() => _colorSetting.OnSetSprite(_images[index]));
                 _figurines[index].onClick.RemoveListener(() => DisableColorPanel());
-                _figurines[index].onClick.AddListener(() => GetBoost.SetActiveBoost(true));
             }
         }
 

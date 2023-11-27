@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -7,15 +8,17 @@ namespace TripleExplosion
     [RequireComponent(typeof(Button))]
     public class MixingButton : MonoBehaviour
     {
+        public event Action MixUsed;
+
         [SerializeField] private Button _button;
         private MixingSettings _mixingSettings;
         private GameBoardHandler _board;
-        private BoostsButtonsHandler _boostsButtonsHandler;
+        private DisablingOtherBoosts _boostsButtonsHandler;
 
         [Inject]
         private void Construct(MixingSettings mixingSettings,
                                GameBoardHandler board,
-                               BoostsButtonsHandler boostsButtonsHandler)
+                               DisablingOtherBoosts boostsButtonsHandler)
         {
             _mixingSettings = mixingSettings;
             _board = board;
@@ -28,6 +31,7 @@ namespace TripleExplosion
             {
                 _boostsButtonsHandler.DisableOtherBoosts();
                 _mixingSettings.Mix();
+                MixUsed?.Invoke();
             }
         }
 
