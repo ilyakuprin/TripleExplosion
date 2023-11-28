@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/_TripleExplosion/Scenes/MainMenu.unity
+    guid: 9480bfd59bf392043bf9f5149f47932a
+  - enabled: 1
     path: Assets/_TripleExplosion/Scenes/EndlessMode.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/_TripleExplosion/Scenes/TaskMode.unity
+    guid: dc17f114389bef74e98fa03d82376e46
   m_configObjects: {}
