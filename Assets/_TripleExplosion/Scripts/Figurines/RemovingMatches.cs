@@ -7,7 +7,7 @@ namespace TripleExplosion
 {
     public class RemovingMatches : IInitializable, IDisposable
     {
-        public event Action<int> MatchAdded;
+        public event Action<List<Transform>> MatchAdded;
 
         private readonly SearchMatches _searchMatches;
         private readonly ReduceFigurine _reduceFigurine;
@@ -48,7 +48,7 @@ namespace TripleExplosion
             if (figurines.Count > 0)
             {
                 _redusedFigurines.AddRange(figurines);
-                MatchAdded?.Invoke(figurines.Count);
+                MatchAdded?.Invoke(figurines);
             }
         }
 

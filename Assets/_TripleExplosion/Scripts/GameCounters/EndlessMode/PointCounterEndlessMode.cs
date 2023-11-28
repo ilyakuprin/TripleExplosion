@@ -5,53 +5,51 @@ using Zenject;
 
 namespace TripleExplosion
 {
-    public class PointCounter : IInitializable, IDisposable
+    public class PointCounterEndlessMode : IInitializable, IDisposable
     {
-        public event Action PointAdded;
+        public event Action<int> PointAdded;
 
         private readonly ReduceFigurine _reduceFigurine;
         private readonly RemovingMatches _removingMatches;
         private readonly BombSettings _bombSettings;
         private readonly int _rewardForFigurine = 1;
 
-        private int _scoredPoints;
         private int _totalCounter;
+        private int _scoredPoints;
 
-        public PointCounter(ReduceFigurine reduceFigurine,
-                            RemovingMatches removingMatches,
-                            BombSettings bombSettings)
+        public PointCounterEndlessMode(ReduceFigurine reduceFigurine,
+                                       RemovingMatches removingMatches,
+                                       BombSettings bombSettings)
         {
             _reduceFigurine = reduceFigurine;
             _removingMatches = removingMatches;
             _bombSettings = bombSettings;
         }
 
-        public int GetCounter { get => _totalCounter; }
-
-        private void CalculatePoints(int count)
+        private void CalculatePoints(List<Transform> figurines)
         {
-            _scoredPoints += count * _rewardForFigurine;
+            _scoredPoints += figurines.Count * _rewardForFigurine;
         }
 
-        private void AddPoint(List<Transform> _)
+        private void AddScoredPoint(List<Transform> _)
         {
             _totalCounter += _scoredPoints;
             _scoredPoints = 0;
-            PointAdded?.Invoke();
+            PointAdded?.Invoke(_totalCounter);
         }
 
         public void Initialize()
         {
             _bombSettings.ListFilled += CalculatePoints;
             _removingMatches.MatchAdded += CalculatePoints;
-            _reduceFigurine.ReducedOver += AddPoint;
+            _reduceFigurine.ReducedOver += AddScoredPoint;
         }
 
         public void Dispose()
         {
             _bombSettings.ListFilled -= CalculatePoints;
             _removingMatches.MatchAdded -= CalculatePoints;
-            _reduceFigurine.ReducedOver -= AddPoint;
+            _reduceFigurine.ReducedOver -= AddScoredPoint;
         }
     }
 }

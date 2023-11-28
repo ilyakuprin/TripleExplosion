@@ -39,7 +39,6 @@ namespace TripleExplosion
             Container.BindInterfacesAndSelfTo<ChangingStartingFigures>().AsSingle();
             Container.BindInterfacesAndSelfTo<FixingNoMoves>().AsSingle();
             Container.BindInterfacesAndSelfTo<FigurinesHandler>().AsSingle();
-            Container.BindInterfacesAndSelfTo<PointCounter>().AsSingle();
         }
 
         private void AssignInitializationOrder()

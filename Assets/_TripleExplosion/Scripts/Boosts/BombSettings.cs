@@ -8,7 +8,7 @@ namespace TripleExplosion
     public class BombSettings : IInitializable, IBoost
     {
         public event Action<bool> BoostActivitySet;
-        public event Action<int> ListFilled;
+        public event Action<List<Transform>> ListFilled;
         public event Action BombUsed;
 
         private readonly GameBoardHandler _board;
@@ -55,7 +55,7 @@ namespace TripleExplosion
                 _board.SetActiveBoarde(false);
                 List<Transform> figurines = new List<Transform>();
                 FillList(figurines, column, row);
-                ListFilled?.Invoke(figurines.Count);
+                ListFilled?.Invoke(figurines);
                 _reduceFigurine.StartReduce(figurines);
                 BombUsed?.Invoke();
             }
