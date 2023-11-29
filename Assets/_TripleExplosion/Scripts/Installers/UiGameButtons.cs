@@ -20,8 +20,6 @@ namespace TripleExplosion
             foreach (PauseButton pause in _pause)
                 Container.Bind<PauseButton>().FromInstance(pause).AsTransient();
 
-            //Container.Bind<TimerCounter>().FromInstance(_timer).AsSingle();
-
             foreach (ReturnToGame toGame in _returnToGames)
                 Container.Bind<ReturnToGame>().FromInstance(toGame).AsTransient();
         }

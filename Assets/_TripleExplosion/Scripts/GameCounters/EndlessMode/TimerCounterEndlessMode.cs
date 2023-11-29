@@ -9,26 +9,25 @@ namespace TripleExplosion
         private RemovingMatches _removingMatches;
         private ReduceFigurine _reduceFigurine;
         private BombSettings _bombSettings;
-        private int _counterExtraTime;
+        private float _counterExtraTime;
 
-        private readonly Dictionary<int, int> _extraTime = new Dictionary<int, int>()
-        {
-            { 3, 1 },
-            { 4, 1 },
-            { 5, 3 },
-            { 6, 4 },
-            { 7, 10 },
-            { 9, 9 }
-        };
+        private readonly Dictionary<int, float> _extraTime = new Dictionary<int, float>();
 
         [Inject]
         private void Construct(RemovingMatches removingMatches,
                                ReduceFigurine reduceFigurine,
-                               BombSettings bombSettings)
+                               BombSettings bombSettings,
+                               EndlessModeConfig endlessModeConfig)
         {
             _removingMatches = removingMatches;
             _reduceFigurine = reduceFigurine;
             _bombSettings = bombSettings;
+
+            DictionaryForInspector[] dictionary = endlessModeConfig.GetDictionary();
+            for (int i = 0; i < dictionary.Length; i++)
+            {
+                _extraTime.Add(dictionary[i].Key, dictionary[i].Value);
+            }
         }
 
         private void CalculateExtraTime(List<Transform> figurines)
