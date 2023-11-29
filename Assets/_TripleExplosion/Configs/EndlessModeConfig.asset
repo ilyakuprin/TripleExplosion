@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cstomDictionary:
   - Key: 3
-    Value: 1
+    Value: 0.4
   - Key: 4
-    Value: 1
+    Value: 0.9
   - Key: 5
-    Value: 3
+    Value: 1.2
   - Key: 6
-    Value: 4
+    Value: 1.5
   - Key: 7
-    Value: 10
+    Value: 7.5
   - Key: 9
-    Value: 9
+    Value: 8
