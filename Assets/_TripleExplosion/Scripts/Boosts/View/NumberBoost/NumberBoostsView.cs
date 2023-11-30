@@ -5,10 +5,11 @@ using Zenject;
 
 namespace TripleExplosion
 {
-    public class NumberBoostsView : MonoBehaviour
+    public abstract class NumberBoostsView : MonoBehaviour
     {
-        [SerializeField] private Button _button;
+        [SerializeField] private Button _buttonBoost;
         [SerializeField] private GameObject _buy;
+        [SerializeField] private GameObject _count;
         [SerializeField] private TextMeshProUGUI _counter;
         [Inject] private readonly BoostCounter _boostCounter;
 
@@ -29,7 +30,8 @@ namespace TripleExplosion
 
         private void SetActiveBoost(bool value)
         {
-            _button.interactable = value;
+            _buttonBoost.interactable = value;
+            _count.SetActive(value);
             _buy.SetActive(!value);
         }
     }

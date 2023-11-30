@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using Zenject;
 
 namespace TripleExplosion
 {
@@ -9,6 +10,7 @@ namespace TripleExplosion
         [SerializeField] private GameObject _canvasTimerOver;
         [SerializeField] private TextMeshProUGUI _textUi;
         [SerializeField] private float _startTime;
+        [Inject] private readonly GameBoardHandler _board;
 
         private readonly int _minutesInHour = 60;
 
@@ -37,6 +39,9 @@ namespace TripleExplosion
             => Timer.SetEnableTimer(!value);
 
         protected void EnabledTimerOver()
-            => _canvasTimerOver.SetActive(true);
+        {
+            _canvasTimerOver.SetActive(true);
+            _board.SetActiveBoarde(false);
+        }
     }
 }

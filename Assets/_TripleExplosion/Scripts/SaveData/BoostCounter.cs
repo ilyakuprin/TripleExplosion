@@ -37,25 +37,35 @@ namespace TripleExplosion
         {
             _saving.SaveData.CountBomb--;
             _saving.Save();
-            BombChanged?.Invoke(_saving.SaveData.CountMix);
+            BombChanged?.Invoke(_saving.SaveData.CountBomb);
         }
 
         private void SubtractSwipe()
         {
             _saving.SaveData.CountSwipe--;
             _saving.Save();
-            SwipeChanged?.Invoke(_saving.SaveData.CountMix);
+            SwipeChanged?.Invoke(_saving.SaveData.CountSwipe);
         }
 
         private void SubtractPaint()
         {
             _saving.SaveData.CountPaint--;
             _saving.Save();
-            PaintChanged?.Invoke(_saving.SaveData.CountMix);
+            PaintChanged?.Invoke(_saving.SaveData.CountPaint);
+        }
+
+        private void InitializeSaveData()
+        {
+            MixChanged?.Invoke(_saving.SaveData.CountMix);
+            BombChanged?.Invoke(_saving.SaveData.CountBomb);
+            SwipeChanged?.Invoke(_saving.SaveData.CountSwipe);
+            PaintChanged?.Invoke(_saving.SaveData.CountPaint);
         }
 
         public void Initialize()
         {
+            _saving.SaveDataReceived += InitializeSaveData;
+
             _mixing.MixUsed += SubtractMix;
             _bomb.BombUsed += SubtractBomb;
             _swipe.ReverseSwipeUsed += SubtractSwipe;
@@ -64,6 +74,8 @@ namespace TripleExplosion
 
         public void Dispose()
         {
+            _saving.SaveDataReceived -= InitializeSaveData;
+
             _mixing.MixUsed -= SubtractMix;
             _bomb.BombUsed -= SubtractBomb;
             _swipe.ReverseSwipeUsed -= SubtractSwipe;
