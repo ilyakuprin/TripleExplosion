@@ -1,46 +1,42 @@
 using System;
-using System.Runtime.InteropServices;
-using TMPro;
-using UnityEngine;
+using YG;
+using Zenject;
 
 namespace TripleExplosion
 {
-    public class InteractionSaving : MonoBehaviour
+    public class InteractionSaving : IInitializable, IDisposable
     {
-        [SerializeField] private TextMeshProUGUI _text;
         public event Action SaveDataReceived;
 
-        public SaveData SaveData;
+        private readonly TimerCounter _timer;
 
-        [DllImport("__Internal")]
-        private static extern void SaveEntern(string date);
-
-        [DllImport("__Internal")]
-        private static extern void LoadEntern();
-
-        private void Start()
+        public InteractionSaving (TimerCounter timer)
         {
-            if (!Application.isEditor)
-                LoadEntern();
-            else
-                SaveDataReceived?.Invoke();
+            _timer = timer;
         }
 
-        public void Save()
+        public void Initialize()
         {
-            if (!Application.isEditor)
-            {
-                string jsonString = JsonUtility.ToJson(SaveData);
-                SaveEntern(jsonString);
-            }
+            OnDataReceived();
+            YandexGame.GetDataEvent += OnDataReceived;
+            _timer.Timer.TimeOver += OnSave;
         }
 
-        //Call from JS.
-        public void SetPlayerInfo(string value)
+        public void OnSave()
         {
-            SaveData = JsonUtility.FromJson<SaveData>(value);
+            YandexGame.SaveProgress();
+            OnDataReceived();
+        }
+
+        private void OnDataReceived()
+        {
             SaveDataReceived?.Invoke();
-            _text.text = SaveData.CountBomb + " | " + SaveData.CountMix + " | " + SaveData.CountPaint + " | " + SaveData.CountSwipe;
+        }
+
+        public void Dispose()
+        {
+            YandexGame.GetDataEvent -= OnDataReceived;
+            _timer.Timer.TimeOver -= OnSave;
         }
     }
 }

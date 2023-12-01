@@ -1,11 +1,14 @@
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
+using YG;
+using Zenject;
 
 namespace TripleExplosion
 {
     public class SoundSettings : MonoBehaviour
     {
+        [Inject] private readonly InteractionSaving _save;
         [SerializeField] private AudioMixer _audioMixer;
         [SerializeField] private Slider _slider;
         private readonly string _parameterMusic = "Music";
@@ -15,16 +18,28 @@ namespace TripleExplosion
 
         public void OnSetValue(float value)
         {
+            float volume;
+
             if (value > _minValue)
             {
-                _audioMixer.SetFloat(_parameterMusic, Mathf.Log10(value) * 20);
+                volume = Mathf.Log10(value) * 20;
+                _audioMixer.SetFloat(_parameterMusic, volume);
                 _mute = false;
             }
             else
             {
-                _audioMixer.SetFloat(_parameterMusic, Mathf.Log10(_minValue) * 20);
+                volume = Mathf.Log10(_minValue) * 20;
+                _audioMixer.SetFloat(_parameterMusic, volume);
                 _mute = true;
             }
+
+            YandexGame.savesData.Volume = value;
+        }
+
+        private void View()
+        {
+            OnSetValue(YandexGame.savesData.Volume);
+            _slider.value = YandexGame.savesData.Volume;
         }
 
         public void OnPressIconSound()
@@ -39,6 +54,16 @@ namespace TripleExplosion
                 _slider.value = _slider.minValue;
                 OnSetValue(_minValue);
             }
+        }
+
+        private void OnEnable()
+        {
+            _save.SaveDataReceived += View;
+        }
+
+        private void OnDisable()
+        {
+            _save.SaveDataReceived -= View;
         }
     }
 }

@@ -6,6 +6,6 @@ namespace TripleExplosion
             => GetBoostCounter.MixChanged += ChangeValue;
 
         private void OnDisable()
-            => GetBoostCounter.MixChanged += ChangeValue;
+            => GetBoostCounter.MixChanged -= ChangeValue;
     }
 }

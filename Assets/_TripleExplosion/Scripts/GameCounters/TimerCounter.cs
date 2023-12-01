@@ -14,7 +14,7 @@ namespace TripleExplosion
 
         private readonly int _minutesInHour = 60;
 
-        protected Timer Timer { get; private set; }
+        public Timer Timer { get; private set; }
 
         private void Awake()
         {

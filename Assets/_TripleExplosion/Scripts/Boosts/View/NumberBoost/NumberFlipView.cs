@@ -6,6 +6,6 @@ namespace TripleExplosion
             => GetBoostCounter.SwipeChanged += ChangeValue;
 
         private void OnDisable()
-            => GetBoostCounter.SwipeChanged += ChangeValue;
+            => GetBoostCounter.SwipeChanged -= ChangeValue;
     }
 }

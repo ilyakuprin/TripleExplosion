@@ -5,26 +5,19 @@ using Zenject;
 
 namespace TripleExplosion
 {
-    public class PointCounterEndlessMode : IInitializable, IDisposable
+    public class PointCounterEndlessMode : IPointCounter, IInitializable, IDisposable
     {
         public event Action<int> PointAdded;
 
-        private readonly ReduceFigurine _reduceFigurine;
-        private readonly RemovingMatches _removingMatches;
-        private readonly BombSettings _bombSettings;
+        [Inject] private readonly ReduceFigurine _reduceFigurine;
+        [Inject] private readonly RemovingMatches _removingMatches;
+        [Inject] private readonly BombSettings _bombSettings;
         private readonly int _rewardForFigurine = 1;
 
-        private int _totalCounter;
         private int _scoredPoints;
+        private int _totalCounter;
 
-        public PointCounterEndlessMode(ReduceFigurine reduceFigurine,
-                                       RemovingMatches removingMatches,
-                                       BombSettings bombSettings)
-        {
-            _reduceFigurine = reduceFigurine;
-            _removingMatches = removingMatches;
-            _bombSettings = bombSettings;
-        }
+        public int TotalCounter { get => _totalCounter; }
 
         private void CalculatePoints(List<Transform> figurines)
         {
@@ -33,9 +26,14 @@ namespace TripleExplosion
 
         private void AddScoredPoint(List<Transform> _)
         {
-            _totalCounter += _scoredPoints;
+            Add(_scoredPoints);
             _scoredPoints = 0;
-            PointAdded?.Invoke(_totalCounter);
+            PointAdded?.Invoke(TotalCounter);
+        }
+
+        public void Add(int value)
+        {
+            _totalCounter += value;
         }
 
         public void Initialize()

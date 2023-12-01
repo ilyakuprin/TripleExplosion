@@ -1,5 +1,6 @@
 using System;
 using Zenject;
+using YG;
 
 namespace TripleExplosion
 {
@@ -28,38 +29,34 @@ namespace TripleExplosion
 
         private void SubtractMix()
         {
-            _saving.SaveData.CountMix--;
-            _saving.Save();
-            MixChanged?.Invoke(_saving.SaveData.CountMix);
+            YandexGame.savesData.CountMix--;
+            MixChanged?.Invoke(YandexGame.savesData.CountMix);
         }
 
         private void SubtractBomb()
         {
-            _saving.SaveData.CountBomb--;
-            _saving.Save();
-            BombChanged?.Invoke(_saving.SaveData.CountBomb);
+            YandexGame.savesData.CountBomb--;
+            BombChanged?.Invoke(YandexGame.savesData.CountBomb);
         }
 
         private void SubtractSwipe()
         {
-            _saving.SaveData.CountSwipe--;
-            _saving.Save();
-            SwipeChanged?.Invoke(_saving.SaveData.CountSwipe);
+            YandexGame.savesData.CountSwipe--;
+            SwipeChanged?.Invoke(YandexGame.savesData.CountSwipe);
         }
 
         private void SubtractPaint()
         {
-            _saving.SaveData.CountPaint--;
-            _saving.Save();
-            PaintChanged?.Invoke(_saving.SaveData.CountPaint);
+            YandexGame.savesData.CountPaint--;
+            PaintChanged?.Invoke(YandexGame.savesData.CountPaint);
         }
 
         private void InitializeSaveData()
         {
-            MixChanged?.Invoke(_saving.SaveData.CountMix);
-            BombChanged?.Invoke(_saving.SaveData.CountBomb);
-            SwipeChanged?.Invoke(_saving.SaveData.CountSwipe);
-            PaintChanged?.Invoke(_saving.SaveData.CountPaint);
+            MixChanged?.Invoke(YandexGame.savesData.CountMix);
+            BombChanged?.Invoke(YandexGame.savesData.CountBomb);
+            SwipeChanged?.Invoke(YandexGame.savesData.CountSwipe);
+            PaintChanged?.Invoke(YandexGame.savesData.CountPaint);
         }
 
         public void Initialize()
