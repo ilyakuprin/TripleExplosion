@@ -8991,8 +8991,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -210}
-  m_SizeDelta: {x: 256.6, y: 50}
+  m_AnchoredPosition: {x: 0, y: -209.82}
+  m_SizeDelta: {x: 230.356, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1236212622
 MonoBehaviour:
@@ -9014,7 +9014,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: (LUIGIONIONX)
+  m_text: (LUIGIONION)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0b0e2aa06ae71bf4f827c98ea6288455, type: 2}
   m_sharedMaterial: {fileID: 5662520040605955315, guid: 0b0e2aa06ae71bf4f827c98ea6288455, type: 2}
@@ -11971,7 +11971,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -120}
-  m_SizeDelta: {x: 226.2, y: 50}
+  m_SizeDelta: {x: 246.197, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1790995085
 MonoBehaviour:
@@ -11993,7 +11993,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: (MOON BOO)
+  m_text: (HYDESWILL)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0b0e2aa06ae71bf4f827c98ea6288455, type: 2}
   m_sharedMaterial: {fileID: 5662520040605955315, guid: 0b0e2aa06ae71bf4f827c98ea6288455, type: 2}
