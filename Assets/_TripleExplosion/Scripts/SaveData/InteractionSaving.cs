@@ -8,18 +8,10 @@ namespace TripleExplosion
     {
         public event Action SaveDataReceived;
 
-        private readonly TimerCounter _timer;
-
-        public InteractionSaving (TimerCounter timer)
-        {
-            _timer = timer;
-        }
-
         public void Initialize()
         {
             OnDataReceived();
             YandexGame.GetDataEvent += OnDataReceived;
-            _timer.Timer.TimeOver += OnSave;
         }
 
         public void OnSave()
@@ -36,7 +28,6 @@ namespace TripleExplosion
         public void Dispose()
         {
             YandexGame.GetDataEvent -= OnDataReceived;
-            _timer.Timer.TimeOver -= OnSave;
         }
     }
 }

@@ -3,22 +3,17 @@ using Zenject;
 
 namespace TripleExplosion
 {
-    public class SaveInstaller : MonoInstaller
+    public class MainMenuInstaller : MonoInstaller
     {
+        [SerializeField] private GameParametersConfig _parameters;
         [SerializeField] private ShopInteractingButtons _shopInteractingButtons;
 
         public override void InstallBindings()
         {
+            Container.Bind<GameParametersConfig>().FromInstance(_parameters).AsSingle();
             Container.Bind<ShopInteractingButtons>().FromInstance(_shopInteractingButtons).AsSingle();
-
-            BindInterfaces();
-        }
-
-        private void BindInterfaces()
-        {
-            Container.BindInterfacesAndSelfTo<BoostCounter>().AsSingle();
             Container.BindInterfacesAndSelfTo<InteractionSaving>().AsSingle();
-            Container.BindInterfacesAndSelfTo<TimerOverSave>().AsSingle();
+            Container.BindInterfacesAndSelfTo<BoostDictionary>().AsSingle();
         }
     }
 }

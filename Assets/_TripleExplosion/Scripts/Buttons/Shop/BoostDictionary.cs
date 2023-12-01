@@ -15,7 +15,7 @@ namespace TripleExplosion
 
     public class BoostDictionary : IInitializable
     {
-        private GameParametersConfig _config;
+        private readonly GameParametersConfig _config;
         private Dictionary<Boost, int> _boostsCost;
 
         public BoostDictionary(GameParametersConfig config)
