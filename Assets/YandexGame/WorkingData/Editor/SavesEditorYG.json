@@ -1,12 +1,12 @@
 {
-    "idSave": 78,
+    "idSave": 109,
     "isFirstSession": false,
     "language": "ru",
     "promptDone": false,
-    "CountBomb": 1,
-    "CountSwipe": 8,
+    "CountBomb": 2,
+    "CountSwipe": 10,
     "CountMix": 1,
-    "CountPaint": 5,
-    "Money": 3,
+    "CountPaint": 2,
+    "Money": 41,
     "Volume": 0.8535046577453613
 }
