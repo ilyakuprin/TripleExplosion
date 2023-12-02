@@ -7,8 +7,6 @@ namespace TripleExplosion
 {
     public class ConversionPoints : IInitializable, IDisposable
      {
-        public event Action MoneyAdded;
-
         private readonly IPointCounter _pointCounter;
         private readonly GameParametersConfig _parameters;
         private readonly TimerCounter _timer;
@@ -26,7 +24,6 @@ namespace TripleExplosion
         {
             int money = Mathf.RoundToInt(_pointCounter.TotalCounter * _parameters.MultiplyModifierMoney);
             YandexGame.savesData.Money += money;
-            MoneyAdded?.Invoke();
         }
 
         public void Initialize()

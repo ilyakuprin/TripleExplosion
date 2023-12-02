@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -19,23 +18,10 @@ namespace TripleExplosion
 
         private void OnDisable()
         {
-            /*_button.onClick.RemoveListener(() => _canvas.SetActive(false));
-            _button.onClick.RemoveListener(() => _pause.OnSetPause(false));*/
-
             _button.onClick.RemoveAllListeners();
         }
 
         private void OnValidate()
             => _button ??= GetComponent<Button>();
-
-        public void Initialize()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

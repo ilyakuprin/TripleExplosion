@@ -9,6 +9,7 @@ namespace TripleExplosion
         [SerializeField] private TimerCounter _timer;
         [SerializeField] private ReturnToGame[] _returnToGames;
         [SerializeField] private GameParametersConfig _parameters;
+        [SerializeField] private GettingExtraTime _gettingExtraTime;
 
         public override void InstallBindings()
         {
@@ -25,6 +26,7 @@ namespace TripleExplosion
                 Container.Bind<ReturnToGame>().FromInstance(toGame).AsTransient();
 
             Container.Bind<GameParametersConfig>().FromInstance(_parameters).AsTransient();
+            Container.Bind<GettingExtraTime>().FromInstance(_gettingExtraTime).AsTransient();
         }
 
         private void BindInterfaces()
@@ -32,6 +34,7 @@ namespace TripleExplosion
             Container.BindInterfacesAndSelfTo<Pause>().AsSingle();
             Container.BindInterfacesAndSelfTo<ConversionPoints>().AsSingle();
             Container.BindInterfacesAndSelfTo<BoostDictionary>().AsSingle();
+            Container.BindInterfacesAndSelfTo<RewardAd>().AsSingle();
         }
     }
 }

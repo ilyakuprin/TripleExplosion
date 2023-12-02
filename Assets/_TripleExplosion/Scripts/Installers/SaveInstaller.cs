@@ -18,7 +18,7 @@ namespace TripleExplosion
         {
             Container.BindInterfacesAndSelfTo<BoostCounter>().AsSingle();
             Container.BindInterfacesAndSelfTo<InteractionSaving>().AsSingle();
-            Container.BindInterfacesAndSelfTo<TimerOverSave>().AsSingle();
+            Container.BindInterfacesAndSelfTo<TimerOverSaving>().AsSingle();
         }
     }
 }

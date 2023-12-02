@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using YG;
 using Zenject;
 
 namespace TripleExplosion
@@ -7,6 +8,11 @@ namespace TripleExplosion
     public class GameSceneLoader : MonoBehaviour
     {
         [Inject] private readonly InteractionSaving _saving;
+
+        private void Awake()
+        {
+            YandexGame.FullscreenShow();
+        }
 
         public void OnLoadMenu()
         {

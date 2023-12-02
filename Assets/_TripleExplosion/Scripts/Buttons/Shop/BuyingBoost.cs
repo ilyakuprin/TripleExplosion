@@ -38,8 +38,7 @@ namespace TripleExplosion
 
         private void OnDisable()
         {
-            _button.onClick.RemoveListener(() => Buy());
-            _button.onClick.RemoveListener(() => _saving.OnSave());
+            _button.onClick.RemoveAllListeners();
         }
 
         private void OnValidate()

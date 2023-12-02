@@ -12,5 +12,8 @@ namespace TripleExplosion
         [field: SerializeField, Range(1, 1000)] public int PaintCost { get; private set; }
         [field: SerializeField, Range(1, 1000)] public int MixCost { get; private set; }
         [field: SerializeField, Range(2, 20)] public int BuySeveral { get; private set; }
+
+        [field: SerializeField, Range(1, 1000)] public int BuyExtraTime { get; private set; }
+        [field: SerializeField, Range(1, 1000)] public int ExtraTimeSeconds { get; private set; }
     }
 }

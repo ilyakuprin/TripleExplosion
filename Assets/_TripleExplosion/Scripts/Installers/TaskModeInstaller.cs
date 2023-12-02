@@ -25,6 +25,7 @@ namespace TripleExplosion
         {
             Container.BindInterfacesAndSelfTo<FormationTasks>().AsSingle();
             Container.BindInterfacesAndSelfTo<PointCounterTaskMode>().AsSingle();
+            Container.BindInterfacesAndSelfTo<RecordSavingTaskMode>().AsSingle();
         }
     }
 }

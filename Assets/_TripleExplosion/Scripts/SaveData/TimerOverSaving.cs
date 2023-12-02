@@ -3,13 +3,13 @@ using Zenject;
 
 namespace TripleExplosion
 {
-    public class TimerOverSave : IInitializable, IDisposable
+    public class TimerOverSaving : IInitializable, IDisposable
     {
         private readonly TimerCounter _timer;
         private readonly InteractionSaving _saving;
 
-        public TimerOverSave(TimerCounter timer,
-                             InteractionSaving saving)
+        public TimerOverSaving(TimerCounter timer,
+                               InteractionSaving saving)
         {
             _timer = timer;
             _saving = saving;

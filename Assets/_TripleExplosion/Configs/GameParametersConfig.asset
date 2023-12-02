@@ -18,3 +18,5 @@ MonoBehaviour:
   <PaintCost>k__BackingField: 80
   <MixCost>k__BackingField: 200
   <BuySeveral>k__BackingField: 5
+  <BuyExtraTime>k__BackingField: 100
+  <ExtraTimeSeconds>k__BackingField: 90

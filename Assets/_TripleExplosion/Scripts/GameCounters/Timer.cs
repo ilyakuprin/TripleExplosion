@@ -16,10 +16,15 @@ namespace TripleExplosion
         public Timer(MonoBehaviour monoBeh)
             => _monoBeh = monoBeh;
 
+        public float TotalTime { get; private set; }
+
         public void SetTime(float startTime)
         {
             if (startTime > 0)
+            {
                 _time = startTime;
+                TotalTime = startTime;
+            }
             else
                 throw new NotImplementedException("Time must be positive");
         }
@@ -27,7 +32,10 @@ namespace TripleExplosion
         public void AddTime(float time)
         {
             if (time > 0)
+            {
                 _time += time;
+                TotalTime += time;
+            }
         }
 
         public void SetEnableTimer(bool value)
