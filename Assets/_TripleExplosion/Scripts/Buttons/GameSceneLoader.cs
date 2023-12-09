@@ -7,23 +7,37 @@ namespace TripleExplosion
 {
     public class GameSceneLoader : MonoBehaviour
     {
-        [Inject] private readonly InteractionSaving _saving;
+        private InteractionSaving _saving;
+        private ConversionPoints _conversionPoints;
+        private SavingResultLb _savingResultLb;
 
-        private void Awake()
+        [Inject]
+        private void Construct(InteractionSaving saving,
+                               ConversionPoints conversionPoints,
+                               SavingResultLb savingResultLb)
+        {
+            _saving = saving;
+            _conversionPoints = conversionPoints;
+            _savingResultLb = savingResultLb;
+        }
+
+        private void Start()
         {
             YandexGame.FullscreenShow();
         }
 
         public void OnLoadMenu()
         {
+            _conversionPoints.Convert();
             _saving.OnSave();
+            _savingResultLb.UpdateLb();
             SceneManager.LoadScene(0);
         }
 
-        //The save will take effect after the timeout screen appears.
-        public void OnReloadCurrentScene()
+        private void OnApplicationQuit()
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            _savingResultLb.UpdateLb();
+            _conversionPoints.Convert();
         }
     }
 }

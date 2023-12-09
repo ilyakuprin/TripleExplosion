@@ -9,8 +9,16 @@ namespace TripleExplosion
     public class BuyingExtraTime : MonoBehaviour
     {
         [SerializeField] private Button _buyButton;
-        [Inject] private readonly GameParametersConfig _config;
-        [Inject] private readonly GettingExtraTime _gettingExtraTime;
+        private GameParametersConfig _config;
+        private GettingExtraTime _gettingExtraTime;
+
+        [Inject]
+        private void Construct(GameParametersConfig config,
+                               GettingExtraTime gettingExtraTime)
+        {
+            _config = config;
+            _gettingExtraTime = gettingExtraTime;
+        }
 
         private void Buy()
         {

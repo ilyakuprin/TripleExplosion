@@ -6,12 +6,19 @@ namespace TripleExplosion
 {
     public class RewardAd : IInitializable, IDisposable
     {
-        [Inject] private readonly GettingExtraTime _gettingExtraTime;
+        private readonly GettingExtraTime _gettingExtraTime;
+
+        public RewardAd(GettingExtraTime gettingExtraTime)
+        {
+            _gettingExtraTime = gettingExtraTime;
+        }
 
         private void Rewarded(int id)
         {
             if (id == 0)
+            {
                 _gettingExtraTime.ContinueGame();
+            }
         }
 
         public void Initialize()

@@ -20,7 +20,7 @@ namespace TripleExplosion
             _timer = timer;
         }
 
-        private void Convert()
+        public void Convert()
         {
             int money = Mathf.RoundToInt(_pointCounter.TotalCounter * _parameters.MultiplyModifierMoney);
             YandexGame.savesData.Money += money;

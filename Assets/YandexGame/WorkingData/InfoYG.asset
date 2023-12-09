@@ -17,7 +17,7 @@ MonoBehaviour:
   autoGameReadyAPI: 1
   playerInfoSimulation:
     authorized: 1
-    isMobile: 0
+    isMobile: 1
     language: ru
     name: Player this
     uniqueID: 000
@@ -26,8 +26,8 @@ MonoBehaviour:
   showFirstAd: 0
   rewardedAfterClosing: 1
   adDisplayCalls: 0
-  fullscreenAdInterval: 5
-  durationOfAdSimulation: 0.5
+  fullscreenAdInterval: 0
+  durationOfAdSimulation: 1
   loadAdWithDelaySimulation: 0
   testErrorOfRewardedAdsInEditor: 0
   saveCloud: 1

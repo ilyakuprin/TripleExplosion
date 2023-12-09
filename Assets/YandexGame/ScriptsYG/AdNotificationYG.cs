@@ -12,6 +12,8 @@ public class AdNotificationYG : MonoBehaviour
     public static bool showingNotification;
     public static AdNotificationYG Instance;
 
+    private Coroutine _closeNotification;
+
     private void Awake()
     {
         if (Instance == null)
@@ -41,7 +43,7 @@ public class AdNotificationYG : MonoBehaviour
         YandexGame.OpenFullAdEvent?.Invoke();
         notificationObj.SetActive(true);
         showingNotification = true;
-        StartCoroutine(CloseNotification());
+        _closeNotification = StartCoroutine(CloseNotification());
     }
 
     private IEnumerator CloseNotification()
@@ -56,6 +58,7 @@ public class AdNotificationYG : MonoBehaviour
     {
         notificationObj.SetActive(false);
         showingNotification = false;
-        StopCoroutine(CloseNotification());
+        if (_closeNotification != null)
+            StopCoroutine(_closeNotification);
     }
 }

@@ -1,18 +1,18 @@
 {
-    "idSave": 178,
+    "idSave": 219,
     "isFirstSession": false,
     "language": "ru",
     "promptDone": false,
     "CountBomb": 99,
     "CountSwipe": 99,
-    "CountMix": 99,
+    "CountMix": 95,
     "CountPaint": 99,
-    "Money": 1026,
-    "Volume": 0.6593669652938843,
+    "Money": 1042,
+    "Volume": 0.3724309504032135,
     "RecordEndlessMode": [
         24,
         21,
-        18
+        20
     ],
     "RecordTaskMode": [
         0,
@@ -22,7 +22,7 @@
     "TimeEndlessMode": [
         13.199996948242188,
         12.799997329711914,
-        12.39999771118164
+        7.40000057220459
     ],
     "TimeTaskMode": [
         0.0,

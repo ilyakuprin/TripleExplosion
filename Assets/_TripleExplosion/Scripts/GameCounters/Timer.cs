@@ -47,7 +47,10 @@ namespace TripleExplosion
         }
 
         private void StartTimer()
-            => _coroutineTimer = _monoBeh.StartCoroutine(UpdateTimer());
+        {
+            StopTimer();
+            _coroutineTimer = _monoBeh.StartCoroutine(UpdateTimer());
+        }
 
         private void StopTimer()
         {

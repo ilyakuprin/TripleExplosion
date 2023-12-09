@@ -1,16 +1,28 @@
-using Zenject;
+using UnityEngine;
 
 namespace TripleExplosion
 {
     public class Pause
     {
-        [Inject] private readonly Falling _falling;
-        [Inject] private readonly SwipeMovementFigures _swipeMovementFigures;
-        [Inject] private readonly ReduceFigurine _reduceFigurine;
-        [Inject] private readonly TimerCounter _timerCounter;
-        [Inject] private readonly GameBoardHandler _board;
-
+        private readonly Falling _falling;
+        private readonly SwipeMovementFigures _swipeMovementFigures;
+        private readonly ReduceFigurine _reduceFigurine;
+        private readonly TimerCounter _timerCounter;
+        private readonly GameBoardHandler _board;
         private bool _isDisabledBoard;
+
+        public Pause(Falling falling,
+                     SwipeMovementFigures swipeMovementFigures,
+                     ReduceFigurine reduceFigurine,
+                     TimerCounter timerCounter,
+                     GameBoardHandler board)
+        {
+            _falling = falling;
+            _swipeMovementFigures = swipeMovementFigures;
+            _reduceFigurine = reduceFigurine;
+            _timerCounter = timerCounter;
+            _board = board;
+        }
 
         public void OnSetPause(bool value)
         {
