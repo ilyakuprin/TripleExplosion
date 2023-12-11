@@ -1,13 +1,13 @@
 {
-    "idSave": 257,
+    "idSave": 261,
     "isFirstSession": false,
     "language": "ru",
     "promptDone": false,
-    "CountBomb": 92,
+    "CountBomb": 87,
     "CountSwipe": 114,
-    "CountMix": 93,
+    "CountMix": 91,
     "CountPaint": 99,
-    "Money": 290,
+    "Money": 305,
     "Volume": 0.06883342564105988,
     "RecordEndlessMode": [
         69,
