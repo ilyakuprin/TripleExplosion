@@ -7,6 +7,7 @@ namespace TripleExplosion
 {
     public class MovingFigurines : IPause
     {
+        public event Action MovementStarted;
         public event Action MovementOver;
 
         private readonly MonoBehaviour _monoBeh;
@@ -21,6 +22,8 @@ namespace TripleExplosion
 
         private IEnumerator Move(List<Transform> figurines)
         {
+            MovementStarted?.Invoke();
+
             float speed = 1 / _time;
             float currentTime = 0;
 

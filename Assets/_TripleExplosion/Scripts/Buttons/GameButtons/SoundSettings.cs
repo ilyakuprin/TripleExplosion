@@ -11,7 +11,7 @@ namespace TripleExplosion
         [Inject] private readonly InteractionSaving _save;
         [SerializeField] private AudioMixer _audioMixer;
         [SerializeField] private Slider _slider;
-        private readonly string _parameterMusic = "Music";
+        private readonly string _parameterMusic = "Master";
         private readonly float _minValue = 0.001f;
         private readonly float _unmuteValue = 0.5f;
         private bool _mute;

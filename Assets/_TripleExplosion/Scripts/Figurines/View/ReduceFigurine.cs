@@ -8,6 +8,7 @@ namespace TripleExplosion
     public class ReduceFigurine : MonoBehaviour, IPause
     {
         public event Action<List<Transform>> ReducedOver;
+        public event Action ReducedStarted;
 
         private readonly float _timeReduce = 0.2f;
         private bool _pause = false;
@@ -17,6 +18,8 @@ namespace TripleExplosion
 
         private IEnumerator Reduce(List<Transform> figurenes)
         {
+            ReducedStarted?.Invoke();
+
             Vector3 currentScale = figurenes[0].localScale;
 
             float currentTime = 0;
